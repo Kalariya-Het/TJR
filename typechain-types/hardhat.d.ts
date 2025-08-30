@@ -57,6 +57,14 @@ declare module "hardhat/types/runtime" {
       name: "HydrogenCreditMarketplace",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.HydrogenCreditMarketplace__factory>;
+    getContractFactory(
+      name: "HydrogenCreditV2",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.HydrogenCreditV2__factory>;
+    getContractFactory(
+      name: "ProductionOracle",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ProductionOracle__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -113,6 +121,16 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.HydrogenCreditMarketplace>;
+    getContractAt(
+      name: "HydrogenCreditV2",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.HydrogenCreditV2>;
+    getContractAt(
+      name: "ProductionOracle",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProductionOracle>;
 
     deployContract(
       name: "Ownable",
@@ -158,6 +176,14 @@ declare module "hardhat/types/runtime" {
       name: "HydrogenCreditMarketplace",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.HydrogenCreditMarketplace>;
+    deployContract(
+      name: "HydrogenCreditV2",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.HydrogenCreditV2>;
+    deployContract(
+      name: "ProductionOracle",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ProductionOracle>;
 
     deployContract(
       name: "Ownable",
@@ -214,6 +240,16 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.HydrogenCreditMarketplace>;
+    deployContract(
+      name: "HydrogenCreditV2",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.HydrogenCreditV2>;
+    deployContract(
+      name: "ProductionOracle",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ProductionOracle>;
 
     // default types
     getContractFactory(

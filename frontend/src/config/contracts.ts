@@ -56,9 +56,13 @@ export const HYDROGEN_CREDIT_ABI = [
           {"internalType": "string", "name": "renewableSource", "type": "string"},
           {"internalType": "uint256", "name": "totalProduced", "type": "uint256"},
           {"internalType": "uint256", "name": "registrationTime", "type": "uint256"},
-          {"internalType": "bool", "name": "isActive", "type": "bool"}
+          {"internalType": "uint256", "name": "monthlyProductionLimit", "type": "uint256"},
+          {"internalType": "uint256", "name": "currentMonthProduction", "type": "uint256"},
+          {"internalType": "uint256", "name": "lastProductionMonth", "type": "uint256"},
+          {"internalType": "bool", "name": "isActive", "type": "bool"},
+          {"internalType": "bool", "name": "isVerified", "type": "bool"}
         ],
-        "internalType": "struct HydrogenCredit.Producer",
+        "internalType": "struct HydrogenCreditV2.Producer",
         "name": "",
         "type": "tuple"
       }
@@ -80,7 +84,8 @@ export const HYDROGEN_CREDIT_ABI = [
       {"internalType": "uint256", "name": "totalSupply", "type": "uint256"},
       {"internalType": "uint256", "name": "totalBatches", "type": "uint256"},
       {"internalType": "uint256", "name": "totalRetired", "type": "uint256"},
-      {"internalType": "uint256", "name": "producerCount", "type": "uint256"}
+      {"internalType": "uint256", "name": "producerCount", "type": "uint256"},
+      {"internalType": "uint256", "name": "verifiedProducerCount", "type": "uint256"}
     ],
     "stateMutability": "view",
     "type": "function"
@@ -98,10 +103,99 @@ export const HYDROGEN_CREDIT_ABI = [
     "outputs": [{"internalType": "address[]", "name": "", "type": "address[]"}],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "batchId", "type": "uint256"}],
+    "name": "getCreditBatch",
+    "outputs": [
+      {
+        "components": [
+          {"internalType": "uint256", "name": "batchId", "type": "uint256"},
+          {"internalType": "address", "name": "producer", "type": "address"},
+          {"internalType": "uint256", "name": "amount", "type": "uint256"},
+          {"internalType": "string", "name": "plantId", "type": "string"},
+          {"internalType": "uint256", "name": "productionTime", "type": "uint256"},
+          {"internalType": "string", "name": "renewableSource", "type": "string"},
+          {"internalType": "bytes32", "name": "verificationHash", "type": "bytes32"},
+          {"internalType": "bool", "name": "isRetired", "type": "bool"},
+          {"internalType": "string", "name": "ipfsHash", "type": "string"}
+        ],
+        "internalType": "struct HydrogenCreditV2.CreditBatch",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalCreditBatches",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
   }
 ] as const
 
 export const MARKETPLACE_ABI = [
+  {
+    "inputs": [
+      {"internalType": "uint256", "name": "amount", "type": "uint256"},
+      {"internalType": "uint256", "name": "pricePerUnit", "type": "uint256"}
+    ],
+    "name": "createListing",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "uint256", "name": "listingId", "type": "uint256"},
+      {"internalType": "uint256", "name": "amount", "type": "uint256"}
+    ],
+    "name": "purchaseCredits",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "listingId", "type": "uint256"}],
+    "name": "cancelListing",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "uint256", "name": "listingId", "type": "uint256"},
+      {"internalType": "uint256", "name": "newPricePerUnit", "type": "uint256"}
+    ],
+    "name": "updateListingPrice",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256", "name": "listingId", "type": "uint256"}],
+    "name": "getListing",
+    "outputs": [
+      {
+        "components": [
+          {"internalType": "uint256", "name": "id", "type": "uint256"},
+          {"internalType": "address", "name": "seller", "type": "address"},
+          {"internalType": "uint256", "name": "amount", "type": "uint256"},
+          {"internalType": "uint256", "name": "pricePerUnit", "type": "uint256"},
+          {"internalType": "uint256", "name": "createdAt", "type": "uint256"},
+          {"internalType": "bool", "name": "isActive", "type": "bool"}
+        ],
+        "internalType": "struct HydrogenCreditMarketplace.Listing",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
   {
     "inputs": [],
     "name": "getMarketplaceStats",
@@ -122,6 +216,30 @@ export const MARKETPLACE_ABI = [
     "type": "function"
   },
   {
+    "inputs": [
+      {"internalType": "uint256", "name": "startId", "type": "uint256"},
+      {"internalType": "uint256", "name": "endId", "type": "uint256"}
+    ],
+    "name": "getActiveListings",
+    "outputs": [
+      {
+        "components": [
+          {"internalType": "uint256", "name": "id", "type": "uint256"},
+          {"internalType": "address", "name": "seller", "type": "address"},
+          {"internalType": "uint256", "name": "amount", "type": "uint256"},
+          {"internalType": "uint256", "name": "pricePerUnit", "type": "uint256"},
+          {"internalType": "uint256", "name": "createdAt", "type": "uint256"},
+          {"internalType": "bool", "name": "isActive", "type": "bool"}
+        ],
+        "internalType": "struct HydrogenCreditMarketplace.Listing[]",
+        "name": "activeListings",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "platformFeePercent",
     "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
@@ -138,8 +256,8 @@ export const NETWORKS: Record<number, NetworkConfig> = {
     name: 'Localhost',
     rpcUrl: 'http://127.0.0.1:8545',
     blockExplorer: '',
-    hydrogenCreditAddress: '0x5FbDB2315678afecb367f032d93F642f64180aa3' as Address, // Fresh deployment
-    marketplaceAddress: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512' as Address,
+    hydrogenCreditAddress: '0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44' as Address, // Fresh V2 deployment
+    marketplaceAddress: '0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f' as Address, // Fresh V2 deployment
   },
   // Sepolia Testnet
   11155111: {
@@ -197,8 +315,8 @@ export const getNetworkConfig = (chainId: number): NetworkConfig => {
 // Contract deployment addresses (update these after deployment)
 export const CONTRACT_ADDRESSES = {
   localhost: {
-    hydrogenCredit: '0x5FbDB2315678afecb367f032d93F642f64180aa3' as Address,
-    marketplace: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512' as Address,
+    hydrogenCredit: '0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44' as Address,
+    marketplace: '0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f' as Address,
   },
   sepolia: {
     hydrogenCredit: '0x0000000000000000000000000000000000000000' as Address,

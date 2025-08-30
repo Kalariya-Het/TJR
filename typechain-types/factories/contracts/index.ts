@@ -3,3 +3,5 @@
 /* eslint-disable */
 export { HydrogenCredit__factory } from "./HydrogenCredit__factory";
 export { HydrogenCreditMarketplace__factory } from "./HydrogenCreditMarketplace__factory";
+export { HydrogenCreditV2__factory } from "./HydrogenCreditV2__factory";
+export { ProductionOracle__factory } from "./ProductionOracle__factory";

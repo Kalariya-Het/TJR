@@ -3,3 +3,5 @@
 /* eslint-disable */
 export type { HydrogenCredit } from "./HydrogenCredit";
 export type { HydrogenCreditMarketplace } from "./HydrogenCreditMarketplace";
+export type { HydrogenCreditV2 } from "./HydrogenCreditV2";
+export type { ProductionOracle } from "./ProductionOracle";

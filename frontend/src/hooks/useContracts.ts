@@ -194,7 +194,7 @@ export const useCreditBatch = (batchId?: bigint) => {
     functionName: 'getCreditBatch',
     args: batchId ? [batchId] : undefined,
     query: { enabled: !!batchId && batchId > BigInt(0) },
-  })
+  } as any)
 
   return { batchData }
 }
@@ -210,7 +210,7 @@ export const useListing = (listingId?: bigint) => {
     functionName: 'getListing',
     args: listingId ? [listingId] : undefined,
     query: { enabled: !!listingId && listingId > BigInt(0) },
-  })
+  } as any)
 
   return { listingData }
 }

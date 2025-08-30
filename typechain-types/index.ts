@@ -28,3 +28,7 @@ export type { HydrogenCredit } from "./contracts/HydrogenCredit";
 export { HydrogenCredit__factory } from "./factories/contracts/HydrogenCredit__factory";
 export type { HydrogenCreditMarketplace } from "./contracts/HydrogenCreditMarketplace";
 export { HydrogenCreditMarketplace__factory } from "./factories/contracts/HydrogenCreditMarketplace__factory";
+export type { HydrogenCreditV2 } from "./contracts/HydrogenCreditV2";
+export { HydrogenCreditV2__factory } from "./factories/contracts/HydrogenCreditV2__factory";
+export type { ProductionOracle } from "./contracts/ProductionOracle";
+export { ProductionOracle__factory } from "./factories/contracts/ProductionOracle__factory";

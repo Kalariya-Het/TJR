@@ -1,0 +1,55 @@
+{"level":"info","message":"🚀 Green Hydrogen API server running on port 3001","service":"green-hydrogen-api","timestamp":"2025-08-30T08:22:34.950Z"}
+{"level":"info","message":"📊 Environment: development","service":"green-hydrogen-api","timestamp":"2025-08-30T08:22:34.951Z"}
+{"level":"info","message":"🔗 Health check: http://localhost:3001/health","service":"green-hydrogen-api","timestamp":"2025-08-30T08:22:34.951Z"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:22:54.521Z","url":"/health","userAgent":"curl/8.7.1"}
+{"duration":"2ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:22:54.523Z","url":"/health"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:23:13.268Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"2ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T08:23:13.270Z","url":"/"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:23:24.440Z","url":"/api/marketplace/listings","userAgent":"curl/8.7.1"}
+{"duration":"12ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":500,"timestamp":"2025-08-30T08:23:24.452Z","url":"/listings"}
+{"level":"info","message":"🚀 Green Hydrogen API server running on port 3001","service":"green-hydrogen-api","timestamp":"2025-08-30T08:25:59.071Z"}
+{"level":"info","message":"📊 Environment: development","service":"green-hydrogen-api","timestamp":"2025-08-30T08:25:59.072Z"}
+{"level":"info","message":"🔗 Health check: http://localhost:3001/health","service":"green-hydrogen-api","timestamp":"2025-08-30T08:25:59.072Z"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:26:18.105Z","url":"/health","userAgent":"curl/8.7.1"}
+{"duration":"5ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:26:18.110Z","url":"/"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:26:40.473Z","url":"/api/health","userAgent":"curl/8.7.1"}
+{"duration":"2ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:26:40.475Z","url":"/health"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:26:52.661Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"2ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:26:52.663Z","url":"/producers"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:27:13.871Z","url":"/api/marketplace/listings","userAgent":"curl/8.7.1"}
+{"duration":"1ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:27:13.872Z","url":"/marketplace/listings"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:27:24.281Z","url":"/api/marketplace/stats","userAgent":"curl/8.7.1"}
+{"duration":"1ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":500,"timestamp":"2025-08-30T08:27:24.282Z","url":"/marketplace/stats"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:27:38.740Z","url":"/","userAgent":"curl/8.7.1"}
+{"duration":"1ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:27:38.741Z","url":"/"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:27:47.513Z","url":"/","userAgent":"curl/8.7.1"}
+{"duration":"1ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:27:47.514Z","url":"/"}
+{"level":"info","message":"🚀 Green Hydrogen API server running on port 3001","service":"green-hydrogen-api","timestamp":"2025-08-30T08:38:53.657Z"}
+{"level":"info","message":"📊 Environment: development","service":"green-hydrogen-api","timestamp":"2025-08-30T08:38:53.658Z"}
+{"level":"info","message":"🔗 Health check: http://localhost:3001/health","service":"green-hydrogen-api","timestamp":"2025-08-30T08:38:53.659Z"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:39:18.782Z","url":"/api/health","userAgent":"curl/8.7.1"}
+{"duration":"25ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:39:18.807Z","url":"/health"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:39:29.489Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"11ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:39:29.500Z","url":"/producers"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:39:52.754Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"2ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:39:52.756Z","url":"/producers"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:39:59.713Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"2ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:39:59.715Z","url":"/producers"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:40:14.721Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"6ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:40:14.727Z","url":"/producers"}
+{"level":"info","message":"SIGTERM received, shutting down gracefully","service":"green-hydrogen-api","timestamp":"2025-08-30T08:44:22.454Z"}
+{"level":"info","message":"🚀 Green Hydrogen API server running on port 3001","service":"green-hydrogen-api","timestamp":"2025-08-30T08:46:13.208Z"}
+{"level":"info","message":"📊 Environment: development","service":"green-hydrogen-api","timestamp":"2025-08-30T08:46:13.209Z"}
+{"level":"info","message":"🔗 Health check: http://localhost:3001/health","service":"green-hydrogen-api","timestamp":"2025-08-30T08:46:13.210Z"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:47:17.121Z","url":"/api/health","userAgent":"curl/8.7.1"}
+{"duration":"40ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:47:17.161Z","url":"/health"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:47:33.815Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"17ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:47:33.832Z","url":"/producers"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:47:39.074Z","url":"/api/marketplace/listings","userAgent":"curl/8.7.1"}
+{"duration":"4ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":500,"timestamp":"2025-08-30T08:47:39.078Z","url":"/marketplace/listings"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:47:51.453Z","url":"/api/producers","userAgent":"curl/8.7.1"}
+{"duration":"10ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:47:51.463Z","url":"/producers"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:47:56.815Z","url":"/api/marketplace/stats","userAgent":"curl/8.7.1"}
+{"duration":"8ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":500,"timestamp":"2025-08-30T08:47:56.823Z","url":"/marketplace/stats"}
+{"ip":"::1","level":"info","message":"Request started","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T08:48:43.902Z","url":"/","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+{"duration":"2ms","level":"info","message":"Request completed","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T08:48:43.904Z","url":"/"}
