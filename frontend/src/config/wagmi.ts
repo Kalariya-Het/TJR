@@ -5,11 +5,24 @@ import { http } from 'viem'
 // Custom chain configuration for local Hardhat
 const hardhatLocal = {
   ...hardhat,
-  id: 31337, // Explicitly set Hardhat's default network ID
+  id: 1337, // Match the chain ID in hardhat.config.ts
+  name: 'Hardhat',
+  nativeCurrency: {
+    name: 'Ether',
+    symbol: 'ETH',
+    decimals: 18,
+  },
   rpcUrls: {
     default: { http: ['http://127.0.0.1:8545'] },
     public: { http: ['http://127.0.0.1:8545'] },
   },
+  blockExplorers: {
+    default: {
+      name: 'Hardhat',
+      url: 'http://localhost:8545',
+    },
+  },
+  testnet: true,
 }
 
 export const config = getDefaultConfig({

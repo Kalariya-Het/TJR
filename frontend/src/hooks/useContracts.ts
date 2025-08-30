@@ -34,6 +34,8 @@ export const useContracts = () => {
 export const useHydrogenCreditReads = () => {
   const chainId = useChainId()
   const contractAddresses = getContractAddresses(chainId)
+  
+  console.log('🔍 useHydrogenCreditReads Debug:', { chainId, contractAddresses })
 
   // Token info
   const { data: name } = useReadContract({
