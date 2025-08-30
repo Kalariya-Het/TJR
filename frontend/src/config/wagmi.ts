@@ -1,4 +1,4 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit'
+import { createConfig } from 'wagmi'
 import { hardhat, sepolia, polygon, polygonMumbai } from 'wagmi/chains'
 import { http } from 'viem'
 
@@ -25,9 +25,7 @@ const hardhatLocal = {
   testnet: true,
 }
 
-export const config = getDefaultConfig({
-  appName: 'Green Hydrogen Credit System',
-  projectId: process.env.REACT_APP_WALLET_CONNECT_PROJECT_ID || 'your-project-id',
+export const config = createConfig({
   chains: [hardhatLocal, sepolia, polygon, polygonMumbai],
   transports: {
     [hardhatLocal.id]: http(),

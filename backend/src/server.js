@@ -76,7 +76,10 @@ app.use('/api/submissions', require('./routes/submissions'));
 app.use('/api/credits', require('./routes/credits'));
 app.use('/api/marketplace', require('./routes/marketplace'));
 app.use('/api/notifications', require('./routes/notifications'));
+app.use('/api/producers', require('./routes/producers'));
 app.use('/api/admin', require('./routes/admin'));
+app.use('/api/admin/kyc', require('./routes/admin/kyc.js'));
+app.use('/api/auth', require('./routes/auth'));
 
 // 404 handler
 app.use('*', (req, res) => {

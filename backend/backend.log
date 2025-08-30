@@ -1,0 +1,114 @@
+
+> green-hydrogen-backend@1.0.0 dev
+> nodemon src/server.js
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,cjs,json[39m
+[32m[nodemon] starting `node src/server.js`[39m
+[32minfo[39m: 🚀 Green Hydrogen API server running on port 3001 {"service":"green-hydrogen-api","timestamp":"2025-08-30T20:47:10.822Z"}
+[32minfo[39m: 📊 Environment: development {"service":"green-hydrogen-api","timestamp":"2025-08-30T20:47:10.823Z"}
+[32minfo[39m: 🔗 Health check: http://localhost:3001/health {"service":"green-hydrogen-api","timestamp":"2025-08-30T20:47:10.824Z"}
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:47:13.391Z","url":"/health","userAgent":"curl/8.7.1"}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T20:47:13.392Z","url":"/"}
+::1 - - [30/Aug/2025:20:47:13 +0000] "GET /health HTTP/1.1" 200 247 "-" "curl/8.7.1"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:47:13.402Z","url":"/health","userAgent":"curl/8.7.1"}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T20:47:13.403Z","url":"/"}
+::1 - - [30/Aug/2025:20:47:13 +0000] "GET /health HTTP/1.1" 200 247 "-" "curl/8.7.1"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:47:13.410Z","url":"/api/admin/dashboard","userAgent":"curl/8.7.1"}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:47:13.411Z","url":"/dashboard"}
+::1 - - [30/Aug/2025:20:47:13 +0000] "GET /api/admin/dashboard HTTP/1.1" 401 56 "-" "curl/8.7.1"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:04.720Z","url":"/api/users/by-wallet/0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+Connected to PostgreSQL database
+Executed query {
+  text: 'SELECT id, email, role, wallet_address, first_name, last_name, company_name, is_active, is_verified, kyc_status FROM users WHERE wallet_address = $1',
+  duration: 37,
+  rows: 1
+}
+[32minfo[39m: Request completed {"duration":"40ms","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T20:55:04.760Z","url":"/users/by-wallet/0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"}
+::1 - - [30/Aug/2025:20:55:04 +0000] "GET /api/users/by-wallet/0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 HTTP/1.1" 200 310 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:17.464Z","url":"/api/submissions/pending","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"28ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:17.492Z","url":"/pending"}
+::1 - - [30/Aug/2025:20:55:17 +0000] "GET /api/submissions/pending HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:17.495Z","url":"/api/submissions/pending","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"2ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:17.497Z","url":"/pending"}
+::1 - - [30/Aug/2025:20:55:17 +0000] "GET /api/submissions/pending HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:18.221Z","url":"/api/producers","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+Executed query {
+  text: 'SELECT * FROM producers ORDER BY created_at DESC',
+  duration: 4,
+  rows: 2
+}
+[32minfo[39m: Request completed {"duration":"4ms","method":"GET","service":"green-hydrogen-api","statusCode":200,"timestamp":"2025-08-30T20:55:18.225Z","url":"/producers"}
+::1 - - [30/Aug/2025:20:55:18 +0000] "GET /api/producers HTTP/1.1" 200 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:18.230Z","url":"/api/producers","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+Executed query {
+  text: 'SELECT * FROM producers ORDER BY created_at DESC',
+  duration: 1,
+  rows: 2
+}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":304,"timestamp":"2025-08-30T20:55:18.231Z","url":"/producers"}
+::1 - - [30/Aug/2025:20:55:18 +0000] "GET /api/producers HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:19.252Z","url":"/api/notifications","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"2ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:19.254Z","url":"/"}
+::1 - - [30/Aug/2025:20:55:19 +0000] "GET /api/notifications HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:19.255Z","url":"/api/notifications","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:19.256Z","url":"/"}
+::1 - - [30/Aug/2025:20:55:19 +0000] "GET /api/notifications HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:20.312Z","url":"/api/submissions/pending","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"2ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:20.314Z","url":"/pending"}
+::1 - - [30/Aug/2025:20:55:20 +0000] "GET /api/submissions/pending HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:20.316Z","url":"/api/submissions/pending","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:20.317Z","url":"/pending"}
+::1 - - [30/Aug/2025:20:55:20 +0000] "GET /api/submissions/pending HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:21.571Z","url":"/api/producers","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+Executed query {
+  text: 'SELECT * FROM producers ORDER BY created_at DESC',
+  duration: 2,
+  rows: 2
+}
+[32minfo[39m: Request completed {"duration":"3ms","method":"GET","service":"green-hydrogen-api","statusCode":304,"timestamp":"2025-08-30T20:55:21.574Z","url":"/producers"}
+::1 - - [30/Aug/2025:20:55:21 +0000] "GET /api/producers HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:21.575Z","url":"/api/producers","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+Executed query {
+  text: 'SELECT * FROM producers ORDER BY created_at DESC',
+  duration: 1,
+  rows: 2
+}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":304,"timestamp":"2025-08-30T20:55:21.576Z","url":"/producers"}
+::1 - - [30/Aug/2025:20:55:21 +0000] "GET /api/producers HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:21.578Z","url":"/api/producers","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+Executed query {
+  text: 'SELECT * FROM producers ORDER BY created_at DESC',
+  duration: 1,
+  rows: 2
+}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":304,"timestamp":"2025-08-30T20:55:21.579Z","url":"/producers"}
+::1 - - [30/Aug/2025:20:55:21 +0000] "GET /api/producers HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:21.580Z","url":"/api/producers","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+Executed query {
+  text: 'SELECT * FROM producers ORDER BY created_at DESC',
+  duration: 1,
+  rows: 2
+}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":304,"timestamp":"2025-08-30T20:55:21.581Z","url":"/producers"}
+::1 - - [30/Aug/2025:20:55:21 +0000] "GET /api/producers HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:23.652Z","url":"/api/admin/users","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"6ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:23.658Z","url":"/users"}
+::1 - - [30/Aug/2025:20:55:23 +0000] "GET /api/admin/users HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:23.661Z","url":"/api/admin/users","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"2ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:23.663Z","url":"/users"}
+::1 - - [30/Aug/2025:20:55:23 +0000] "GET /api/admin/users HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:24.738Z","url":"/api/admin/kyc","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"2ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:24.740Z","url":"/"}
+::1 - - [30/Aug/2025:20:55:24 +0000] "GET /api/admin/kyc HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:24.741Z","url":"/api/admin/kyc","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:24.742Z","url":"/"}
+::1 - - [30/Aug/2025:20:55:24 +0000] "GET /api/admin/kyc HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:26.768Z","url":"/api/admin/audit-logs","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"2ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:26.770Z","url":"/audit-logs"}
+::1 - - [30/Aug/2025:20:55:26 +0000] "GET /api/admin/audit-logs HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+[32minfo[39m: Request started {"ip":"::1","method":"GET","service":"green-hydrogen-api","timestamp":"2025-08-30T20:55:26.771Z","url":"/api/admin/audit-logs","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+[32minfo[39m: Request completed {"duration":"1ms","method":"GET","service":"green-hydrogen-api","statusCode":401,"timestamp":"2025-08-30T20:55:26.772Z","url":"/audit-logs"}
+::1 - - [30/Aug/2025:20:55:26 +0000] "GET /api/admin/audit-logs HTTP/1.1" 401 50 "http://localhost:3000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"

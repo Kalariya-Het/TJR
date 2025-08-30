@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
-import { readContract } from 'wagmi/actions'
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { Address, formatEther, parseEther } from 'viem'
 import {
     PlusIcon,
@@ -19,22 +18,30 @@ import { Card, SimpleCard } from './ui/Card'
 import { Button } from './ui/Button'
 import { LoadingSpinner } from './ui/LoadingSpinner'
 import { Notification } from './ui/Notification'
+import { useUser } from '../context/UserContext'
 import { getContractAddresses } from '../config/contracts'
 import { HYDROGEN_CREDIT_ABI } from '../config/contracts'
 import { useChainId } from 'wagmi'
 
 interface Producer {
-    plantId: string
-    location: string
-    renewableSource: string
-    totalProduced: bigint
-    registrationTime: bigint
-    isActive: boolean
-}
-
-interface ProducerWithAddress {
-    address: Address
-    producer: Producer
+    id: string;
+    user_id: string;
+    wallet_address: Address;
+    plant_id: string;
+    plant_name: string;
+    location: string;
+    country: string;
+    renewable_source: string;
+    capacity_kg_per_month: number;
+    certification_body: string;
+    certification_number: string;
+    registration_time: string;
+    is_active: boolean;
+    is_verified: boolean;
+    monthly_production_limit: string;
+    total_produced: string;
+    created_at: string;
+    updated_at: string;
 }
 
 interface RegisterProducerForm {
@@ -73,11 +80,12 @@ const getSourceConfig = (source: string) => {
 
 export const ProducerManagement: React.FC = () => {
     const { address } = useAccount()
+    const { user, token } = useUser()
     const chainId = useChainId()
     const contractAddresses = getContractAddresses(chainId)
 
     // State
-    const [producers, setProducers] = useState<ProducerWithAddress[]>([])
+    const [producers, setProducers] = useState<Producer[]>([])
     const [loading, setLoading] = useState(true)
     const [showRegisterForm, setShowRegisterForm] = useState(false)
     const [showIssueForm, setShowIssueForm] = useState(false)
@@ -92,29 +100,10 @@ export const ProducerManagement: React.FC = () => {
         amount: '',
         productionTime: ''
     })
-    const [selectedProducer, setSelectedProducer] = useState<Address | null>(null)
+    const [selectedProducer, setSelectedProducer] = useState<string | null>(null)
     const [searchTerm, setSearchTerm] = useState('')
     const [filterSource, setFilterSource] = useState<string>('all')
     const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'inactive'>('all')
-
-    // Contract reads
-    const { data: owner } = useReadContract({
-        address: contractAddresses.hydrogenCredit,
-        abi: HYDROGEN_CREDIT_ABI,
-        functionName: 'owner',
-    }) as { data: Address | undefined }
-
-    const { data: contractStats } = useReadContract({
-        address: contractAddresses.hydrogenCredit,
-        abi: HYDROGEN_CREDIT_ABI,
-        functionName: 'getContractStats',
-    }) as { data: [bigint, bigint, bigint, bigint] | undefined }
-
-    const { data: allProducers } = useReadContract({
-        address: contractAddresses.hydrogenCredit,
-        abi: HYDROGEN_CREDIT_ABI,
-        functionName: 'getAllProducers',
-    }) as { data: Address[] | undefined }
 
     // Contract writes
     const { writeContract, data: writeData, isPending: isWriting } = useWriteContract()
@@ -122,66 +111,31 @@ export const ProducerManagement: React.FC = () => {
         hash: writeData,
     })
 
-    // Check if user is admin
-    const isAdmin = address && owner && address.toLowerCase() === owner.toLowerCase()
+    // Check if user is admin (using backend role)
+    const isAdmin = user?.role === 'admin'
 
-    // Load producers
+    // Load producers from backend API
     useEffect(() => {
-        if (allProducers) {
+        if (isAdmin) {
             loadProducers()
         }
-    }, [allProducers])
+    }, [isAdmin])
 
     // Filter producers
     useEffect(() => {
-        if (allProducers) {
+        if (isAdmin) {
             loadProducers()
         }
     }, [searchTerm, filterSource, filterStatus])
 
     const loadProducers = async () => {
-        if (!allProducers) return
-
         try {
             setLoading(true)
-            const producersData: ProducerWithAddress[] = []
-
-            for (const producerAddress of allProducers) {
-                try {
-                    const producerData = await readProducerData(producerAddress)
-                    if (producerData) {
-                        producersData.push({
-                            address: producerAddress,
-                            producer: producerData
-                        })
-                    }
-                } catch (error) {
-                    console.error(`Error loading producer ${producerAddress}:`, error)
-                }
+            const response = await fetch('http://localhost:3001/api/producers')
+            const result = await response.json()
+            if (result.success) {
+                setProducers(result.data)
             }
-
-            // Apply filters
-            let filtered = producersData
-
-            if (searchTerm) {
-                filtered = filtered.filter(p =>
-                    p.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    p.producer.plantId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    p.producer.location.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-            }
-
-            if (filterSource !== 'all') {
-                filtered = filtered.filter(p => p.producer.renewableSource === filterSource)
-            }
-
-            if (filterStatus !== 'all') {
-                filtered = filtered.filter(p =>
-                    filterStatus === 'active' ? p.producer.isActive : !p.producer.isActive
-                )
-            }
-
-            setProducers(filtered)
         } catch (error) {
             console.error('Error loading producers:', error)
         } finally {
@@ -189,59 +143,58 @@ export const ProducerManagement: React.FC = () => {
         }
     }
 
-    const readProducerData = async (producerAddress: Address): Promise<Producer | null> => {
-        try {
-            // For now, return null as we'll need to implement this differently
-            // The readContract function signature has changed in Wagmi v2
-            console.warn('readProducerData needs to be implemented with proper Wagmi v2 approach')
-            return null
-        } catch (error) {
-            console.error(`Error reading producer data for ${producerAddress}:`, error)
-            return null
-        }
-    }
-
     const handleRegisterProducer = async () => {
         if (!registerForm.producerAddress || !registerForm.plantId || !registerForm.location || !registerForm.renewableSource) {
-            return
+            alert('Please fill all required fields for producer registration.');
+            return;
         }
 
         try {
-            await writeContract({
-                address: contractAddresses.hydrogenCredit,
-                abi: HYDROGEN_CREDIT_ABI,
-                functionName: 'registerProducer',
-                args: [
-                    registerForm.producerAddress as Address,
-                    registerForm.plantId,
-                    registerForm.location,
-                    registerForm.renewableSource
-                ],
-            }, {})
-
-            setRegisterForm({
-                producerAddress: '',
-                plantId: '',
-                location: '',
-                renewableSource: 'Solar'
-            })
-            setShowRegisterForm(false)
-            await loadProducers()
+            const response = await fetch('http://localhost:3001/api/producers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Assuming token is available
+                },
+                body: JSON.stringify({
+                    wallet_address: registerForm.producerAddress,
+                    plant_id: registerForm.plantId,
+                    plant_name: registerForm.plantId, // Using plantId as name for simplicity
+                    location: registerForm.location,
+                    country: 'Germany', // Default country for now
+                    renewable_source: registerForm.renewableSource,
+                    capacity_kg_per_month: 10000, // Default capacity for now
+                    monthly_production_limit: '1000000000000000000', // Default limit for now
+                    certification_body: 'N/A',
+                    certification_number: 'N/A',
+                    user_id: user?.id // Assuming admin registers for a user
+                })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert('Producer registered successfully via backend!');
+                loadProducers();
+                setShowRegisterForm(false);
+            } else {
+                alert(`Error registering producer: ${data.error || 'Unknown error'}`);
+            }
         } catch (error) {
-            console.error('Error registering producer:', error)
+            console.error('Backend registration error:', error);
+            alert('Failed to register producer via backend.');
         }
     }
 
     const handleIssueCredits = async () => {
         if (!issueForm.producerAddress || !issueForm.amount || !issueForm.productionTime) {
-            return
+            alert('Please fill all required fields for credit issuance.');
+            return;
         }
 
         try {
-            const amount = parseEther(issueForm.amount)
-            const productionTime = Math.floor(new Date(issueForm.productionTime).getTime() / 1000)
+            const amount = parseEther(issueForm.amount);
+            const productionTime = Math.floor(new Date(issueForm.productionTime).getTime() / 1000);
 
-            await writeContract({
+            writeContract({
                 address: contractAddresses.hydrogenCredit,
                 abi: HYDROGEN_CREDIT_ABI,
                 functionName: 'issueCredits',
@@ -250,45 +203,42 @@ export const ProducerManagement: React.FC = () => {
                     amount,
                     BigInt(productionTime)
                 ],
-            }, {})
+            });
 
             setIssueForm({
                 producerAddress: '',
                 amount: '',
                 productionTime: ''
-            })
-            setShowIssueForm(false)
-            await loadProducers()
+            });
+            setShowIssueForm(false);
         } catch (error) {
-            console.error('Error issuing credits:', error)
+            console.error('Error issuing credits:', error);
+            alert('Failed to issue credits. Check console for details.');
         }
     }
 
-    const handleToggleProducerStatus = async (producerAddress: Address, currentStatus: boolean) => {
+    const handleToggleProducerStatus = async (producerId: string, currentStatus: boolean) => {
         try {
-            if (currentStatus) {
-                await writeContract({
-                    address: contractAddresses.hydrogenCredit,
-                    abi: HYDROGEN_CREDIT_ABI,
-                    functionName: 'deactivateProducer',
-                    args: [producerAddress],
-                }, {})
+            const response = await fetch(`http://localhost:3001/api/admin/producers/${producerId}/status`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ is_active: !currentStatus })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert(`Producer status toggled successfully: ${data.user.is_active ? 'Active' : 'Inactive'}`);
+                loadProducers();
             } else {
-                await writeContract({
-                    address: contractAddresses.hydrogenCredit,
-                    abi: HYDROGEN_CREDIT_ABI,
-                    functionName: 'reactivateProducer',
-                    args: [producerAddress],
-                }, {})
+                alert(`Error toggling producer status: ${data.error || 'Unknown error'}`);
             }
-
-            await loadProducers()
         } catch (error) {
-            console.error('Error toggling producer status:', error)
+            console.error('Error toggling producer status:', error);
+            alert('Failed to toggle producer status.');
         }
     }
-
-
 
     if (!isAdmin) {
         return (
@@ -296,7 +246,7 @@ export const ProducerManagement: React.FC = () => {
                 <XCircleIcon className="h-12 w-12 text-red-400 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Access Denied</h3>
                 <p className="text-gray-500">
-                    You need to be the contract owner to access producer management.
+                    You need to be an admin to access producer management.
                 </p>
             </div>
         )
@@ -328,7 +278,7 @@ export const ProducerManagement: React.FC = () => {
                         <div className="ml-4">
                             <p className="text-sm font-medium text-gray-600">Total Producers</p>
                             <p className="text-2xl font-bold text-gray-900">
-                                {contractStats?.[3]?.toString() || '0'}
+                                {producers.length}
                             </p>
                         </div>
                     </div>
@@ -340,7 +290,7 @@ export const ProducerManagement: React.FC = () => {
                         <div className="ml-4">
                             <p className="text-sm font-medium text-gray-600">Total Supply</p>
                             <p className="text-2xl font-bold text-gray-900">
-                                {contractStats?.[0] ? `${Number(formatEther(contractStats[0])).toFixed(0)} GHC` : '0 GHC'}
+                                {producers.reduce((acc, p) => acc + Number(p.total_produced), 0).toFixed(0)} GHC
                             </p>
                         </div>
                     </div>
@@ -350,9 +300,9 @@ export const ProducerManagement: React.FC = () => {
                     <div className="flex items-center">
                         <CheckCircleIcon className="h-8 w-8 text-purple-600" />
                         <div className="ml-4">
-                            <p className="text-sm font-medium text-gray-600">Total Batches</p>
+                            <p className="text-sm font-medium text-gray-600">Active Producers</p>
                             <p className="text-2xl font-bold text-gray-900">
-                                {contractStats?.[1]?.toString() || '0'}
+                                {producers.filter(p => p.is_active).length}
                             </p>
                         </div>
                     </div>
@@ -364,7 +314,8 @@ export const ProducerManagement: React.FC = () => {
                         <div className="ml-4">
                             <p className="text-sm font-medium text-gray-600">Retired Credits</p>
                             <p className="text-2xl font-bold text-gray-900">
-                                {contractStats?.[2] ? `${Number(formatEther(contractStats[2])).toFixed(0)} GHC` : '0 GHC'}
+                                {/* This data is not directly available from /api/producers, needs a separate API call or calculation */}
+                                0 GHC
                             </p>
                         </div>
                     </div>
@@ -483,6 +434,7 @@ export const ProducerManagement: React.FC = () => {
                                 onChange={(e) => setRegisterForm({ ...registerForm, renewableSource: e.target.value })}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
+                                <option value="all">Select a source</option>
                                 {RENEWABLE_SOURCES.map(source => (
                                     <option key={source.value} value={source.value}>{source.label}</option>
                                 ))}
@@ -531,9 +483,9 @@ export const ProducerManagement: React.FC = () => {
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
                                 <option value="">Select a producer</option>
-                                {producers.filter(p => p.producer.isActive).map(producer => (
-                                    <option key={producer.address} value={producer.address}>
-                                        {producer.producer.plantId} - {producer.address.slice(0, 6)}...{producer.address.slice(-4)}
+                                {producers.filter(p => p.is_active).map(producer => (
+                                    <option key={producer.id} value={producer.wallet_address}>
+                                        {producer.plant_name} - {producer.wallet_address.slice(0, 6)}...{producer.wallet_address.slice(-4)}
                                     </option>
                                 ))}
                             </select>
@@ -596,13 +548,13 @@ export const ProducerManagement: React.FC = () => {
 
             {/* Producers List */}
             <div className="space-y-4">
-                {producers.map((producerData) => (
+                {producers.map((producer) => (
                     <ProducerCard
-                        key={producerData.address}
-                        producerData={producerData}
+                        key={producer.id}
+                        producer={producer}
                         onToggleStatus={handleToggleProducerStatus}
-                        onSelect={() => setSelectedProducer(producerData.address)}
-                        isSelected={selectedProducer === producerData.address}
+                        onSelect={() => setSelectedProducer(producer.id)}
+                        isSelected={selectedProducer === producer.id}
                     />
                 ))}
             </div>
@@ -635,42 +587,41 @@ export const ProducerManagement: React.FC = () => {
 
 // Producer Card Component
 interface ProducerCardProps {
-    producerData: ProducerWithAddress
-    onToggleStatus: (address: Address, currentStatus: boolean) => void
+    producer: Producer
+    onToggleStatus: (id: string, currentStatus: boolean) => void
     onSelect: () => void
     isSelected: boolean
 }
 
 const ProducerCard: React.FC<ProducerCardProps> = ({
-    producerData,
+    producer,
     onToggleStatus,
     onSelect,
     isSelected
 }) => {
-    const { address, producer } = producerData
-
-    const formattedTotalProduced = Number(formatEther(producer.totalProduced))
-    const registrationDate = new Date(Number(producer.registrationTime) * 1000)
+    const formattedTotalProduced = Number(producer.total_produced)
+    const registrationDate = new Date(producer.registration_time)
+    const sourceConfig = getSourceConfig(producer.renewable_source)
 
     return (
-        <Card title={producer.plantId}>
+        <Card title={producer.plant_name}>
             <div className="space-y-4">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        {getSourceIcon(producer.renewableSource)}
+                        {getSourceIcon(producer.renewable_source)}
                         <div>
-                            <h3 className="font-semibold text-gray-900">{producer.plantId}</h3>
+                            <h3 className="font-semibold text-gray-900">{producer.plant_name}</h3>
                             <p className="text-sm text-gray-600">{producer.location}</p>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${producer.isActive
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${producer.is_active
                             ? 'bg-green-100 text-green-800'
                             : 'bg-red-100 text-red-800'
                             }`}>
-                            {producer.isActive ? 'Active' : 'Inactive'}
+                            {producer.is_active ? 'Active' : 'Inactive'}
                         </span>
                     </div>
                 </div>
@@ -680,7 +631,7 @@ const ProducerCard: React.FC<ProducerCardProps> = ({
                     <div>
                         <p className="text-sm text-gray-600">Address</p>
                         <p className="text-sm font-medium text-gray-900 font-mono">
-                            {address.slice(0, 6)}...{address.slice(-4)}
+                            {producer.wallet_address.slice(0, 6)}...{producer.wallet_address.slice(-4)}
                         </p>
                     </div>
 
@@ -693,7 +644,7 @@ const ProducerCard: React.FC<ProducerCardProps> = ({
 
                     <div>
                         <p className="text-sm text-gray-600">Source</p>
-                        <p className="text-sm font-medium text-gray-900">{producer.renewableSource}</p>
+                        <p className="text-sm font-medium text-gray-900">{producer.renewable_source}</p>
                     </div>
 
                     <div>
@@ -707,12 +658,12 @@ const ProducerCard: React.FC<ProducerCardProps> = ({
                 {/* Actions */}
                 <div className="flex gap-3">
                     <Button
-                        onClick={() => onToggleStatus(address, producer.isActive)}
-                        variant={producer.isActive ? "danger" : "secondary"}
+                        onClick={() => onToggleStatus(producer.id, producer.is_active)}
+                        variant={producer.is_active ? "danger" : "secondary"}
                         size="sm"
                         className="flex-1"
                     >
-                        {producer.isActive ? 'Deactivate' : 'Activate'}
+                        {producer.is_active ? 'Deactivate' : 'Activate'}
                     </Button>
 
                     <Button

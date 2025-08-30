@@ -4,6 +4,7 @@ const { body, param, query, validationResult } = require('express-validator');
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.error('Validation errors:', errors.array()); // Added for debugging
     return res.status(400).json({
       error: 'Validation failed',
       code: 'VALIDATION_ERROR',

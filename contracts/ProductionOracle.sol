@@ -156,8 +156,7 @@ contract ProductionOracle is Ownable, Pausable, ReentrancyGuard {
             plantId,
             amount,
             productionTime,
-            ipfsHash,
-            block.timestamp
+            ipfsHash
         ));
         
         require(productionRecords[dataHash].submissionTime == 0, "Data already submitted");

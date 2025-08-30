@@ -42,6 +42,38 @@ router.get('/producers', async (req, res) => {
   }
 });
 
+// Get user by wallet address (public endpoint for profile fetching)
+router.get('/users/by-wallet/:walletAddress', async (req, res) => {
+  try {
+    const { walletAddress } = req.params;
+    const result = await query(
+      'SELECT id, email, role, wallet_address, first_name, last_name, company_name, is_active, is_verified, kyc_status FROM users WHERE wallet_address = $1',
+      [walletAddress]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found for this wallet address',
+        code: 'USER_NOT_FOUND'
+      });
+    }
+
+    res.json({
+      success: true,
+      user: result.rows[0]
+    });
+
+  } catch (error) {
+    console.error('Get user by wallet error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to fetch user by wallet address',
+      code: 'FETCH_USER_BY_WALLET_ERROR'
+    });
+  }
+});
+
 // Get marketplace listings
 router.get('/marketplace/listings', async (req, res) => {
   try {

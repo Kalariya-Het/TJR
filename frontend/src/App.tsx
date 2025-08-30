@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { WagmiProvider } from 'wagmi'
-import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import '@rainbow-me/rainbowkit/styles.css'
 
 import { config } from './config/wagmi'
 import { Header } from './components/layout/Header'
@@ -13,11 +11,27 @@ import { Producers } from './components/Producers'
 import { ProducerManagement } from './components/ProducerManagement'
 import { Analytics } from './components/Analytics'
 import { useAccount } from 'wagmi'
+import { UserProvider, useUser } from './context/UserContext';
+import { LoadingSpinner } from './components/ui/LoadingSpinner'
+import { Login } from './components/Auth/Login'
+import { Register } from './components/Auth/Register'
+import { SubmitProductionData } from './components/Producer/SubmitProductionData'
+import { ReviewSubmissions } from './components/Verifier/ReviewSubmissions'
+import { MyCredits } from './components/User/MyCredits'
+import { Notifications } from './components/User/Notifications'
+import { UserManagement } from './components/Admin/UserManagement'
+import { KycManagement } from './components/Admin/KycManagement'
+import { AuditLogs } from './components/Admin/AuditLogs'
 
 const queryClient = new QueryClient()
 
+interface AppContentProps {
+  // No onConnectWallet prop needed here anymore
+}
+
 function AppContent() {
   const { address } = useAccount()
+  const { user, isLoadingUser, token } = useUser()
   const [currentPage, setCurrentPage] = useState('dashboard')
 
   const renderCurrentPage = () => {
@@ -32,23 +46,59 @@ function AppContent() {
         return <ProducerManagement />
       case 'analytics':
         return <Analytics />
+      case 'submit-production':
+        return <SubmitProductionData />
+      case 'review-submissions':
+        return <ReviewSubmissions />
+      case 'my-credits':
+        return <MyCredits />
+      case 'notifications':
+        return <Notifications />
+      case 'user-management':
+        return <UserManagement />
+      case 'kyc-management':
+        return <KycManagement />
+      case 'audit-logs':
+        return <AuditLogs />
       default:
         return <Dashboard onNavigate={setCurrentPage} />
+    }
+  }
+
+  if (isLoadingUser) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <LoadingSpinner size="lg" />
+        <p className="ml-3 text-gray-600">Loading user profile...</p>
+      </div>
+    )
+  }
+
+  // If no user is logged in (no token or user object), show the login/register page
+  if (!user && !token) {
+    if (showRegisterPage) {
+      return <Register 
+        onRegisterSuccess={() => setShowRegisterPage(false)} 
+        onNavigateToLogin={() => setShowRegisterPage(false)} 
+      />;
+    } else {
+      return <Login onNavigateToRegister={() => setShowRegisterPage(true)} />;
     }
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      {address && (
+      {user && (
         <Navigation
           currentPage={currentPage}
           onPageChange={setCurrentPage}
+          userRole={user.role}
         />
       )}
       <main className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {address ? (
+          {user ? (
             renderCurrentPage()
           ) : (
             <div className="text-center py-12">
@@ -97,14 +147,9 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider
-          theme={darkTheme({
-            accentColor: '#10b981',
-            accentColorForeground: 'white',
-          })}
-        >
+        <UserProvider>
           <AppContent />
-        </RainbowKitProvider>
+        </UserProvider>
       </QueryClientProvider>
     </WagmiProvider>
   )

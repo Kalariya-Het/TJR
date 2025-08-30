@@ -1,4 +1,5 @@
 const express = require('express');
+const { ethers } = require('ethers');
 const { pool } = require('../config/database');
 const { authenticateToken, requireRole, requireKYCVerification } = require('../middleware/auth');
 const { validateProducerRegistration, validateProductionSubmission, validatePagination, validateUUID } = require('../middleware/validation');
@@ -380,11 +381,11 @@ router.post('/:id/submissions', authenticateToken, requireRole('producer'), requ
       });
     }
 
-    // Generate data hash (simplified - in production, this would come from blockchain)
-    const dataHash = '0x' + require('crypto')
-      .createHash('sha256')
-      .update(`${id}-${plant_id}-${amount}-${production_time}-${ipfs_hash}-${Date.now()}`)
-      .digest('hex');
+    // Generate data hash to match the smart contract
+    const dataHash = ethers.solidityPackedKeccak256(
+      ['address', 'string', 'uint256', 'uint256', 'string'],
+      [producer.wallet_address, plant_id, amount, production_time, ipfs_hash]
+    );
 
     // Insert production submission
     const result = await pool.query(`

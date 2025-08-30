@@ -6,7 +6,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Users table for authentication and authorization
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE users (
 );
 
 -- Producers table for hydrogen production facilities
-CREATE TABLE producers (
+CREATE TABLE IF NOT EXISTS producers (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     wallet_address VARCHAR(42) UNIQUE NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE producers (
 );
 
 -- Verifiers table for third-party verification entities
-CREATE TABLE verifiers (
+CREATE TABLE IF NOT EXISTS verifiers (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     wallet_address VARCHAR(42) UNIQUE NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE verifiers (
 );
 
 -- Production data submissions
-CREATE TABLE production_submissions (
+CREATE TABLE IF NOT EXISTS production_submissions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     producer_id UUID REFERENCES producers(id) ON DELETE CASCADE,
     data_hash VARCHAR(66) UNIQUE NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE production_submissions (
 );
 
 -- Credit batches issued from verified production
-CREATE TABLE credit_batches (
+CREATE TABLE IF NOT EXISTS credit_batches (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     batch_id INTEGER UNIQUE NOT NULL,
     producer_id UUID REFERENCES producers(id) ON DELETE CASCADE,
@@ -105,7 +105,7 @@ CREATE TABLE credit_batches (
 );
 
 -- Credit transfers and transactions
-CREATE TABLE credit_transactions (
+CREATE TABLE IF NOT EXISTS credit_transactions (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     transaction_hash VARCHAR(66) UNIQUE NOT NULL,
     transaction_type VARCHAR(20) NOT NULL, -- 'transfer', 'retirement', 'issuance'
@@ -122,7 +122,7 @@ CREATE TABLE credit_transactions (
 );
 
 -- Marketplace listings
-CREATE TABLE marketplace_listings (
+CREATE TABLE IF NOT EXISTS marketplace_listings (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     listing_id INTEGER UNIQUE NOT NULL,
     seller_id UUID REFERENCES users(id),
@@ -141,7 +141,7 @@ CREATE TABLE marketplace_listings (
 );
 
 -- Marketplace purchases
-CREATE TABLE marketplace_purchases (
+CREATE TABLE IF NOT EXISTS marketplace_purchases (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     listing_id INTEGER REFERENCES marketplace_listings(listing_id),
     buyer_id UUID REFERENCES users(id),
@@ -157,7 +157,7 @@ CREATE TABLE marketplace_purchases (
 );
 
 -- Audit logs for system events
-CREATE TABLE audit_logs (
+CREATE TABLE IF NOT EXISTS audit_logs (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users(id),
     action VARCHAR(100) NOT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE audit_logs (
 );
 
 -- System notifications
-CREATE TABLE notifications (
+CREATE TABLE IF NOT EXISTS notifications (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     type VARCHAR(50) NOT NULL,
@@ -184,7 +184,7 @@ CREATE TABLE notifications (
 );
 
 -- API keys for external integrations
-CREATE TABLE api_keys (
+CREATE TABLE IF NOT EXISTS api_keys (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     key_name VARCHAR(100) NOT NULL,
@@ -197,52 +197,52 @@ CREATE TABLE api_keys (
 );
 
 -- Create indexes for better performance
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_users_wallet_address ON users(wallet_address);
-CREATE INDEX idx_users_role ON users(role);
-CREATE INDEX idx_users_is_active ON users(is_active);
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_wallet_address ON users(wallet_address);
+CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
+CREATE INDEX IF NOT EXISTS idx_users_is_active ON users(is_active);
 
-CREATE INDEX idx_producers_wallet_address ON producers(wallet_address);
-CREATE INDEX idx_producers_plant_id ON producers(plant_id);
-CREATE INDEX idx_producers_is_active ON producers(is_active);
-CREATE INDEX idx_producers_user_id ON producers(user_id);
+CREATE INDEX IF NOT EXISTS idx_producers_wallet_address ON producers(wallet_address);
+CREATE INDEX IF NOT EXISTS idx_producers_plant_id ON producers(plant_id);
+CREATE INDEX IF NOT EXISTS idx_producers_is_active ON producers(is_active);
+CREATE INDEX IF NOT EXISTS idx_producers_user_id ON producers(user_id);
 
-CREATE INDEX idx_verifiers_wallet_address ON verifiers(wallet_address);
-CREATE INDEX idx_verifiers_is_active ON verifiers(is_active);
-CREATE INDEX idx_verifiers_user_id ON verifiers(user_id);
+CREATE INDEX IF NOT EXISTS idx_verifiers_wallet_address ON verifiers(wallet_address);
+CREATE INDEX IF NOT EXISTS idx_verifiers_is_active ON verifiers(is_active);
+CREATE INDEX IF NOT EXISTS idx_verifiers_user_id ON verifiers(user_id);
 
-CREATE INDEX idx_production_submissions_data_hash ON production_submissions(data_hash);
-CREATE INDEX idx_production_submissions_producer_id ON production_submissions(producer_id);
-CREATE INDEX idx_production_submissions_status ON production_submissions(status);
-CREATE INDEX idx_production_submissions_production_time ON production_submissions(production_time);
+CREATE INDEX IF NOT EXISTS idx_production_submissions_data_hash ON production_submissions(data_hash);
+CREATE INDEX IF NOT EXISTS idx_production_submissions_producer_id ON production_submissions(producer_id);
+CREATE INDEX IF NOT EXISTS idx_production_submissions_status ON production_submissions(status);
+CREATE INDEX IF NOT EXISTS idx_production_submissions_production_time ON production_submissions(production_time);
 
-CREATE INDEX idx_credit_batches_batch_id ON credit_batches(batch_id);
-CREATE INDEX idx_credit_batches_producer_id ON credit_batches(producer_id);
-CREATE INDEX idx_credit_batches_production_time ON credit_batches(production_time);
-CREATE INDEX idx_credit_batches_is_retired ON credit_batches(is_retired);
+CREATE INDEX IF NOT EXISTS idx_credit_batches_batch_id ON credit_batches(batch_id);
+CREATE INDEX IF NOT EXISTS idx_credit_batches_producer_id ON credit_batches(producer_id);
+CREATE INDEX IF NOT EXISTS idx_credit_batches_production_time ON credit_batches(production_time);
+CREATE INDEX IF NOT EXISTS idx_credit_batches_is_retired ON credit_batches(is_retired);
 
-CREATE INDEX idx_credit_transactions_transaction_hash ON credit_transactions(transaction_hash);
-CREATE INDEX idx_credit_transactions_from_address ON credit_transactions(from_address);
-CREATE INDEX idx_credit_transactions_to_address ON credit_transactions(to_address);
-CREATE INDEX idx_credit_transactions_type ON credit_transactions(transaction_type);
-CREATE INDEX idx_credit_transactions_created_at ON credit_transactions(created_at);
+CREATE INDEX IF NOT EXISTS idx_credit_transactions_transaction_hash ON credit_transactions(transaction_hash);
+CREATE INDEX IF NOT EXISTS idx_credit_transactions_from_address ON credit_transactions(from_address);
+CREATE INDEX IF NOT EXISTS idx_credit_transactions_to_address ON credit_transactions(to_address);
+CREATE INDEX IF NOT EXISTS idx_credit_transactions_type ON credit_transactions(transaction_type);
+CREATE INDEX IF NOT EXISTS idx_credit_transactions_created_at ON credit_transactions(created_at);
 
-CREATE INDEX idx_marketplace_listings_seller_address ON marketplace_listings(seller_address);
-CREATE INDEX idx_marketplace_listings_status ON marketplace_listings(status);
-CREATE INDEX idx_marketplace_listings_created_at ON marketplace_listings(created_at);
+CREATE INDEX IF NOT EXISTS idx_marketplace_listings_seller_address ON marketplace_listings(seller_address);
+CREATE INDEX IF NOT EXISTS idx_marketplace_listings_status ON marketplace_listings(status);
+CREATE INDEX IF NOT EXISTS idx_marketplace_listings_created_at ON marketplace_listings(created_at);
 
-CREATE INDEX idx_marketplace_purchases_buyer_address ON marketplace_purchases(buyer_address);
-CREATE INDEX idx_marketplace_purchases_seller_address ON marketplace_purchases(seller_address);
-CREATE INDEX idx_marketplace_purchases_transaction_hash ON marketplace_purchases(transaction_hash);
+CREATE INDEX IF NOT EXISTS idx_marketplace_purchases_buyer_address ON marketplace_purchases(buyer_address);
+CREATE INDEX IF NOT EXISTS idx_marketplace_purchases_seller_address ON marketplace_purchases(seller_address);
+CREATE INDEX IF NOT EXISTS idx_marketplace_purchases_transaction_hash ON marketplace_purchases(transaction_hash);
 
-CREATE INDEX idx_audit_logs_user_id ON audit_logs(user_id);
-CREATE INDEX idx_audit_logs_action ON audit_logs(action);
-CREATE INDEX idx_audit_logs_resource_type ON audit_logs(resource_type);
-CREATE INDEX idx_audit_logs_created_at ON audit_logs(created_at);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_user_id ON audit_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_action ON audit_logs(action);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_resource_type ON audit_logs(resource_type);
+CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON audit_logs(created_at);
 
-CREATE INDEX idx_notifications_user_id ON notifications(user_id);
-CREATE INDEX idx_notifications_is_read ON notifications(is_read);
-CREATE INDEX idx_notifications_created_at ON notifications(created_at);
+CREATE INDEX IF NOT EXISTS idx_notifications_user_id ON notifications(user_id);
+CREATE INDEX IF NOT EXISTS idx_notifications_is_read ON notifications(is_read);
+CREATE INDEX IF NOT EXISTS idx_notifications_created_at ON notifications(created_at);
 
 -- Create triggers for updated_at timestamps
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -253,20 +253,26 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+DROP TRIGGER IF EXISTS update_users_updated_at ON users;
 CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON users
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_producers_updated_at ON producers;
 CREATE TRIGGER update_producers_updated_at BEFORE UPDATE ON producers
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_verifiers_updated_at ON verifiers;
 CREATE TRIGGER update_verifiers_updated_at BEFORE UPDATE ON verifiers
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_production_submissions_updated_at ON production_submissions;
 CREATE TRIGGER update_production_submissions_updated_at BEFORE UPDATE ON production_submissions
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_credit_batches_updated_at ON credit_batches;
 CREATE TRIGGER update_credit_batches_updated_at BEFORE UPDATE ON credit_batches
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_marketplace_listings_updated_at ON marketplace_listings;
 CREATE TRIGGER update_marketplace_listings_updated_at BEFORE UPDATE ON marketplace_listings
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

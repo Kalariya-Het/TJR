@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline'
 import { LeafIcon } from 'lucide-react'
 import { cn } from '../../utils'
-import { useAccount } from 'wagmi'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { useIsAdmin, useIsProducer } from '../../hooks/useContracts'
 
 const navigation = [
@@ -18,6 +17,8 @@ export const Header: React.FC = () => {
   const { address } = useAccount()
   const { isAdmin } = useIsAdmin()
   const { isProducer } = useIsProducer()
+  const { connectors, connect } = useConnect()
+  const { disconnect } = useDisconnect()
 
   // Add conditional navigation items based on user role
   const getNavigationItems = () => {
@@ -69,7 +70,34 @@ export const Header: React.FC = () => {
 
           {/* Connect button and mobile menu */}
           <div className="flex items-center space-x-4">
-            <ConnectButton />
+            {address ? (
+              <div className="flex items-center space-x-3">
+                <div className="text-sm text-gray-700">
+                  <span className="font-medium">
+                    {address.slice(0, 6)}...{address.slice(-4)}
+                  </span>
+                  {isAdmin && (
+                    <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                      Admin
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={() => disconnect()}
+                  className="px-3 py-1 text-sm font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100"
+                >
+                  Disconnect
+                </button>
+                <UserIcon className="h-6 w-6 text-gray-400" />
+              </div>
+            ) : (
+              <button
+                onClick={() => connect({ connector: connectors[0] })}
+                className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100"
+              >
+                Connect Wallet
+              </button>
+            )}
             
             {/* Mobile menu button */}
             {address && (

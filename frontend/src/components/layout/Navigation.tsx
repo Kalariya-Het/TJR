@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useAccount, useReadContract } from 'wagmi'
-import { Address } from 'viem'
+import { useAccount } from 'wagmi'
 import {
     HomeIcon,
     BanknotesIcon,
@@ -10,15 +9,20 @@ import {
     Bars3Icon,
     XMarkIcon,
     UserIcon,
-    GlobeAltIcon
+    GlobeAltIcon,
+    CloudArrowUpIcon,
+    ClipboardDocumentCheckIcon,
+    CreditCardIcon,
+    BellIcon,
+    UsersIcon,
+    ShieldCheckIcon,
+    DocumentMagnifyingGlassIcon
 } from '@heroicons/react/24/outline'
-import { getContractAddresses } from '../../config/contracts'
-import { HYDROGEN_CREDIT_ABI } from '../../config/contracts'
-import { useChainId } from 'wagmi'
 
 interface NavigationProps {
     currentPage: string
     onPageChange: (page: string) => void
+    userRole: string | undefined
 }
 
 const NAVIGATION_ITEMS = [
@@ -27,28 +31,64 @@ const NAVIGATION_ITEMS = [
         name: 'Dashboard',
         icon: HomeIcon,
         description: 'Overview of your credits and system status',
-        color: 'from-primary-600 to-primary-700'
+        color: 'from-primary-600 to-primary-700',
+        roles: ['admin', 'producer', 'verifier', 'buyer']
     },
     {
         id: 'marketplace',
         name: 'Marketplace',
         icon: BanknotesIcon,
         description: 'Buy and sell hydrogen credits',
-        color: 'from-green-600 to-green-700'
+        color: 'from-green-600 to-green-700',
+        roles: ['admin', 'producer', 'verifier', 'buyer']
     },
     {
         id: 'producers',
         name: 'Producers',
         icon: UserGroupIcon,
         description: 'View registered hydrogen producers',
-        color: 'from-blue-600 to-blue-700'
+        color: 'from-blue-600 to-blue-700',
+        roles: ['admin', 'producer', 'verifier', 'buyer']
+    },
+    {
+        id: 'submit-production',
+        name: 'Submit Production',
+        icon: CloudArrowUpIcon,
+        description: 'Submit new hydrogen production data',
+        color: 'from-yellow-600 to-yellow-700',
+        roles: ['producer']
+    },
+    {
+        id: 'review-submissions',
+        name: 'Review Submissions',
+        icon: ClipboardDocumentCheckIcon,
+        description: 'Review and verify pending production data',
+        color: 'from-teal-600 to-teal-700',
+        roles: ['verifier', 'admin']
+    },
+    {
+        id: 'my-credits',
+        name: 'My Credits',
+        icon: CreditCardIcon,
+        description: 'View and manage your hydrogen credits',
+        color: 'from-indigo-600 to-indigo-700',
+        roles: ['producer', 'buyer']
+    },
+    {
+        id: 'notifications',
+        name: 'Notifications',
+        icon: BellIcon,
+        description: 'View system notifications and alerts',
+        color: 'from-pink-600 to-pink-700',
+        roles: ['admin', 'producer', 'verifier', 'buyer']
     },
     {
         id: 'analytics',
         name: 'Analytics',
         icon: ChartBarIcon,
         description: 'Market trends and environmental impact',
-        color: 'from-purple-600 to-purple-700'
+        color: 'from-purple-600 to-purple-700',
+        roles: ['admin']
     },
     {
         id: 'producer-management',
@@ -56,24 +96,37 @@ const NAVIGATION_ITEMS = [
         icon: CogIcon,
         description: 'Admin tools for managing producers',
         color: 'from-orange-600 to-orange-700',
-        adminOnly: true
+        roles: ['admin']
+    },
+    {
+        id: 'user-management',
+        name: 'User Management',
+        icon: UsersIcon,
+        description: 'Manage all users in the system',
+        color: 'from-gray-600 to-gray-700',
+        roles: ['admin']
+    },
+    {
+        id: 'kyc-management',
+        name: 'KYC Management',
+        icon: ShieldCheckIcon,
+        description: 'Review and manage user KYC submissions',
+        color: 'from-lime-600 to-lime-700',
+        roles: ['admin']
+    },
+    {
+        id: 'audit-logs',
+        name: 'Audit Logs',
+        icon: DocumentMagnifyingGlassIcon,
+        description: 'View system audit trails and logs',
+        color: 'from-cyan-600 to-cyan-700',
+        roles: ['admin']
     }
 ]
 
-export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange }) => {
+export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange, userRole }) => {
     const { address } = useAccount()
-    const chainId = useChainId()
-    const contractAddresses = getContractAddresses(chainId)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-    // Check if user is admin
-    const { data: owner } = useReadContract({
-        address: contractAddresses.hydrogenCredit,
-        abi: HYDROGEN_CREDIT_ABI,
-        functionName: 'owner',
-    }) as { data: Address | undefined }
-
-    const isAdmin = address && owner && address.toLowerCase() === owner.toLowerCase()
 
     const handlePageChange = (page: string) => {
         onPageChange(page)
@@ -81,7 +134,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
     }
 
     const filteredNavigationItems = NAVIGATION_ITEMS.filter(item =>
-        !item.adminOnly || isAdmin
+        userRole && item.roles.includes(userRole)
     )
 
     return (
@@ -112,7 +165,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
                                         onClick={() => handlePageChange(item.id)}
                                         className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200 ${isActive
                                             ? 'border-primary-500 text-primary-600'
-                                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:hover:border-gray-300'
                                             }`}
                                     >
                                         <IconComponent className="h-5 w-5 mr-2" />
@@ -130,7 +183,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
                                         <span className="font-medium">
                                             {address.slice(0, 6)}...{address.slice(-4)}
                                         </span>
-                                        {isAdmin && (
+                                        {userRole === 'admin' && (
                                             <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
                                                 Admin
                                             </span>
@@ -139,9 +192,12 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
                                     <UserIcon className="h-6 w-6 text-gray-400" />
                                 </div>
                             ) : (
-                                <div className="text-sm text-gray-500">
+                                <button
+                                    onClick={() => connect({ connector: connectors[0] })}
+                                    className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100"
+                                >
                                     Connect Wallet
-                                </div>
+                                </button>
                             )}
                         </div>
                     </div>
@@ -174,61 +230,6 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChang
                                     <Bars3Icon className="h-6 w-6" />
                                 )}
                             </button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Mobile menu */}
-                {isMobileMenuOpen && (
-                    <div className="lg:hidden">
-                        <div className="pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
-                            {filteredNavigationItems.map((item) => {
-                                const IconComponent = item.icon
-                                const isActive = currentPage === item.id
-
-                                return (
-                                    <button
-                                        key={item.id}
-                                        onClick={() => handlePageChange(item.id)}
-                                        className={`w-full text-left px-4 py-3 text-base font-medium transition-colors duration-200 ${isActive
-                                            ? 'bg-primary-50 border-r-2 border-primary-500 text-primary-700'
-                                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800'
-                                            }`}
-                                    >
-                                        <div className="flex items-center">
-                                            <IconComponent className="h-5 w-5 mr-3" />
-                                            {item.name}
-                                            {item.adminOnly && (
-                                                <span className="ml-auto inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                                                    Admin
-                                                </span>
-                                            )}
-                                        </div>
-                                    </button>
-                                )
-                            })}
-                        </div>
-
-                        {/* User info in mobile menu */}
-                        <div className="pt-4 pb-3 border-t border-gray-200">
-                            {address ? (
-                                <div className="px-4 py-3">
-                                    <div className="text-sm text-gray-700">
-                                        <span className="font-medium">
-                                            {address.slice(0, 6)}...{address.slice(-4)}
-                                        </span>
-                                        {isAdmin && (
-                                            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                                                Admin
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="px-4 py-3 text-sm text-gray-500">
-                                    Connect Wallet
-                                </div>
-                            )}
                         </div>
                     </div>
                 )}

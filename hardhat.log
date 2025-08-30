@@ -72,8 +72,6 @@ Private Key: 0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e
 WARNING: These accounts, and their private keys, are publicly known.
 Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 
-[32meth_blockNumber[0m
-[32meth_blockNumber (2)[0m
 [32meth_chainId[0m
 [32meth_accounts[0m
 [32mhardhat_metadata[0m
@@ -123,13 +121,47 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 [32meth_feeHistory[0m
 [32meth_maxPriorityFeePerGas[0m
 [32meth_sendTransaction[0m
-  Contract deployment: HydrogenCredit
+  Contract deployment: ProductionOracle
   Contract address:    0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Transaction:         0x924439284fae9c16d699b462b447329e903983e8c1c3945021d8cbaff9d8601a
+  Transaction:         0x8fa3fad95a87f3f9eb52d05e55c0d75facce147ad09a4e33239160f95072df72
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   Value:               0 ETH
-  Gas used:            2355693 of 30000000
-  Block #1:            0xa890eb80ec1e8d89545e8e8047a6124647e73ec119dbe7abd3a1dd9613df00eb
+  Gas used:            2118446 of 30000000
+  Block #1:            0x87f7ea626cac42bc359b3dd3dfce5d024a33ffb9ce7b2c444822ed078e36702e
+
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionReceipt[0m
+[32meth_accounts[0m
+[32mhardhat_metadata[0m
+[32mhardhat_metadata (2)[0m
+[32mhardhat_metadata (3)[0m
+[32mhardhat_metadata (4)[0m
+[32mhardhat_metadata (5)[0m
+[32mhardhat_metadata (6)[0m
+[32mhardhat_metadata (7)[0m
+[32mhardhat_metadata (8)[0m
+[32mhardhat_metadata (9)[0m
+[32mhardhat_metadata (10)[0m
+[32mhardhat_metadata (11)[0m
+[32mhardhat_metadata (12)[0m
+[32mhardhat_metadata (13)[0m
+[32mhardhat_metadata (14)[0m
+[32mhardhat_metadata (15)[0m
+[32mhardhat_metadata (16)[0m
+[32mhardhat_metadata (17)[0m
+[32mhardhat_metadata (18)[0m
+[32mhardhat_metadata (19)[0m
+[32mhardhat_metadata (20)[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract deployment: HydrogenCreditV2
+  Contract address:    0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Transaction:         0x1e8007dcfd6920d25893a15c07c7fc408b07798587853836114c358db590aa21
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  Value:               0 ETH
+  Gas used:            3129579 of 30000000
+  Block #2:            0xceaf919dc6f633795b99adf1b56410c8c0069895403d0c6be062330ad8d833ee
 
 [32meth_getTransactionByHash[0m
 [32meth_getTransactionReceipt[0m
@@ -158,728 +190,664 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 [32meth_feeHistory[0m
 [32meth_sendTransaction[0m
   Contract deployment: HydrogenCreditMarketplace
-  Contract address:    0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-  Transaction:         0xb04aa228ef476bbc21d09076d6041379abce1f1a935a31b72f1f1c6787f57584
+  Contract address:    0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+  Transaction:         0xa820992d478a94bba17800ce3eb9c6f80b9a719f103abf809643b89b813b3b06
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   Value:               0 ETH
   Gas used:            1736347 of 30000000
-  Block #2:            0x5e76ffe976d5190e74d4643965f3a26d045f48b0858efda505e0489975c65a6c
+  Block #3:            0xa9c6f3fcf6665e9b7cbdb7c78bca5ad9c322fda7b027fd24f889e6d876d94591
+
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionReceipt[0m
+[32meth_accounts[0m
+[32mhardhat_metadata[0m
+[32mhardhat_metadata (2)[0m
+[32mhardhat_metadata (3)[0m
+[32mhardhat_metadata (4)[0m
+[32mhardhat_metadata (5)[0m
+[32mhardhat_metadata (6)[0m
+[32mhardhat_metadata (7)[0m
+[32mhardhat_metadata (8)[0m
+[32mhardhat_metadata (9)[0m
+[32mhardhat_metadata (10)[0m
+[32mhardhat_metadata (11)[0m
+[32mhardhat_metadata (12)[0m
+[32mhardhat_metadata (13)[0m
+[32mhardhat_metadata (14)[0m
+[32mhardhat_metadata (15)[0m
+[32mhardhat_metadata (16)[0m
+[32mhardhat_metadata (17)[0m
+[32mhardhat_metadata (18)[0m
+[32mhardhat_metadata (19)[0m
+[32mhardhat_metadata (20)[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       ProductionOracle#addVerifier
+  Transaction:         0xede1ff15320413b5be2fa01ab3e31fa39efe83f1e9546f2952317a6688677966
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            231352 of 30000000
+  Block #4:            0xb830959aa43b5da2c781e9d61236ff73335a8ae23044feab0a9c7561ddb7fc34
+
+[32meth_getTransactionByHash[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       ProductionOracle#addVerifier
+  Transaction:         0xa4e126f9416be84afdbb73c1811e543de7c7e83e3d0ca42b1bddfbdb1f13a15e
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            191934 of 30000000
+  Block #5:            0xe82d0ce111110a24ee7d86caa9ab3722f1a7eb78185e28ba1d16c54060f75141
+
+[32meth_getTransactionByHash[0m
+[32meth_accounts[0m
+[32mhardhat_metadata[0m
+[32mhardhat_metadata (2)[0m
+[32mhardhat_metadata (3)[0m
+[32mhardhat_metadata (4)[0m
+[32mhardhat_metadata (5)[0m
+[32mhardhat_metadata (6)[0m
+[32mhardhat_metadata (7)[0m
+[32mhardhat_metadata (8)[0m
+[32mhardhat_metadata (9)[0m
+[32mhardhat_metadata (10)[0m
+[32mhardhat_metadata (11)[0m
+[32mhardhat_metadata (12)[0m
+[32mhardhat_metadata (13)[0m
+[32mhardhat_metadata (14)[0m
+[32mhardhat_metadata (15)[0m
+[32mhardhat_metadata (16)[0m
+[32mhardhat_metadata (17)[0m
+[32mhardhat_metadata (18)[0m
+[32mhardhat_metadata (19)[0m
+[32mhardhat_metadata (20)[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       HydrogenCreditV2#registerProducer
+  Transaction:         0x0d1ec2914f8f8462a256ae0691278e7b17febb0bc5bce31c5fedd9a11332eda1
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            236570 of 30000000
+  Block #6:            0xb6e373bb09f26c7a4f0fc1e894564348ac6b8356fe816e571810e0667ac4ab49
+
+[32meth_getTransactionByHash[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       HydrogenCreditV2#setProducerVerification
+  Transaction:         0x5a08b9122d2e0ff8e130d972d0c4f7ddc0e919d77e9e80ecd7b3a8773c723457
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            29531 of 30000000
+  Block #7:            0x69f5bb24b9dfb9ba6adc46f28a77070b68a7fcc58dd1e2d92d6bb391e908551f
+
+[32meth_getTransactionByHash[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       HydrogenCreditV2#registerProducer
+  Transaction:         0xb0a6cfd98127304765f07a2781db1eb270cd3daffc88d58890130d43e372358d
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            219446 of 30000000
+  Block #8:            0xfd62dd3d2cdddf510d8b15ea53d73e1367d032a4739c0a879d47379baa3ab59b
+
+[32meth_getTransactionByHash[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       HydrogenCreditV2#setProducerVerification
+  Transaction:         0xe2bd4b49bf011248dd6fd946b93df2b5208cbd72a5a355daafa8de1a3249ecb5
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            29531 of 30000000
+  Block #9:            0xf8b3f25c26d5eec05deac20bd0a991ad1b2bba10b836214c3762f0ad74fdf706
+
+[32meth_getTransactionByHash[0m
+[32meth_call[0m
+  Contract call:       ProductionOracle#getActiveVerifiers
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       HydrogenCreditV2#name
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+
+[32meth_call[0m
+  Contract call:       HydrogenCreditV2#symbol
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+
+[32meth_call[0m
+  Contract call:       HydrogenCreditV2#owner
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+
+[32meth_call[0m
+  Contract call:       HydrogenCreditV2#getContractStats
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+
+[32meth_chainId[0m
+[32meth_accounts[0m
+[32mhardhat_metadata[0m
+[32mhardhat_metadata (2)[0m
+[32mhardhat_metadata (3)[0m
+[32mhardhat_metadata (4)[0m
+[32mhardhat_metadata (5)[0m
+[32mhardhat_metadata (6)[0m
+[32mhardhat_metadata (7)[0m
+[32mhardhat_metadata (8)[0m
+[32mhardhat_metadata (9)[0m
+[32mhardhat_metadata (10)[0m
+[32mhardhat_metadata (11)[0m
+[32mhardhat_metadata (12)[0m
+[32mhardhat_metadata (13)[0m
+[32mhardhat_metadata (14)[0m
+[32mhardhat_metadata (15)[0m
+[32mhardhat_metadata (16)[0m
+[32mhardhat_metadata (17)[0m
+[32mhardhat_metadata (18)[0m
+[32mhardhat_metadata (19)[0m
+[32mhardhat_metadata (20)[0m
+[32meth_accounts[0m
+[32mhardhat_metadata[0m
+[32mhardhat_metadata (2)[0m
+[32mhardhat_metadata (3)[0m
+[32mhardhat_metadata (4)[0m
+[32mhardhat_metadata (5)[0m
+[32mhardhat_metadata (6)[0m
+[32mhardhat_metadata (7)[0m
+[32mhardhat_metadata (8)[0m
+[32mhardhat_metadata (9)[0m
+[32mhardhat_metadata (10)[0m
+[32mhardhat_metadata (11)[0m
+[32mhardhat_metadata (12)[0m
+[32mhardhat_metadata (13)[0m
+[32mhardhat_metadata (14)[0m
+[32mhardhat_metadata (15)[0m
+[32mhardhat_metadata (16)[0m
+[32mhardhat_metadata (17)[0m
+[32mhardhat_metadata (18)[0m
+[32mhardhat_metadata (19)[0m
+[32mhardhat_metadata (20)[0m
+[32meth_accounts[0m
+[32mhardhat_metadata[0m
+[32mhardhat_metadata (2)[0m
+[32mhardhat_metadata (3)[0m
+[32mhardhat_metadata (4)[0m
+[32mhardhat_metadata (5)[0m
+[32mhardhat_metadata (6)[0m
+[32mhardhat_metadata (7)[0m
+[32mhardhat_metadata (8)[0m
+[32mhardhat_metadata (9)[0m
+[32mhardhat_metadata (10)[0m
+[32mhardhat_metadata (11)[0m
+[32mhardhat_metadata (12)[0m
+[32mhardhat_metadata (13)[0m
+[32mhardhat_metadata (14)[0m
+[32mhardhat_metadata (15)[0m
+[32mhardhat_metadata (16)[0m
+[32mhardhat_metadata (17)[0m
+[32mhardhat_metadata (18)[0m
+[32mhardhat_metadata (19)[0m
+[32mhardhat_metadata (20)[0m
+[32meth_blockNumber[0m
+[32meth_getBlockByNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       ProductionOracle#submitProductionData
+  Transaction:         0x36aa7db348137f55aa8285145b08f3d1f474769d890212d9745824dc3d292f62
+  From:                0x90f79bf6eb2c4f870365e785982e1f101e93b906
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0.1 ETH
+  Gas used:            286324 of 30000000
+  Block #10:           0x159373005a28105cf6c773ff0582499a0d37d7cd3b3b44440f8005d858d0fc59
+
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionReceipt[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       ProductionOracle#verifyProductionData
+  Transaction:         0x37d2716c3651aee61841e2adb2e863c2e6b40f4c3428f61503b34b275906ce1c
+  From:                0x70997970c51812dc3a010c7d01b50e0d17dc79c8
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            93822 of 30000000
+  Block #11:           0x9da5f5aa053d788028fe76dd720b47afff48b44f044e0d4fce6695a446a804d6
 
 [32meth_getTransactionByHash[0m
 [32meth_getTransactionReceipt[0m
 [32meth_call[0m
-  Contract call:       HydrogenCredit#name
+  Contract call:       HydrogenCreditV2#balanceOf
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 
-[32meth_call[0m
-  Contract call:       HydrogenCredit#symbol
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       HydrogenCreditV2#issueCreditsFromVerification
+  Transaction:         0x292d04051bcf0b41c7b530ef2f8912beaab694eef981847f5b7287538a5f46f7
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            429134 of 30000000
+  Block #12:           0x54e60ef98db71bd9a276b82bca017b7b435e17b4acc547717fa2c099fb9c95fe
 
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionReceipt[0m
 [32meth_call[0m
-  Contract call:       HydrogenCredit#owner
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#owner
+  Contract call:       HydrogenCreditV2#balanceOf
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 
 [32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#hydrogenCredit
+  Contract call:       HydrogenCreditV2#getProducer
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 
-[32meth_chainId[0m
-[32meth_chainId (2)[0m
-[32meth_chainId (3)[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#registerProducer
-  Transaction:         0xdf4bc08c864adb1c0004450e11f179948349d71019deb929e25cfc6a4ec0c1c0
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            189267 of 30000000
-  Block #3:            0xb3e17365fd14cc711051161148dbdee7acf00635251301574409be283cac5df1
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#issueCredits
-  Transaction:         0x44d904bfef5282a2ea95177dc65010f1dece57b134eef61c1edbe490f1034de5
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            307605 of 30000000
-  Block #4:            0xd6cf2ff11ac083ed5e4b26131352eecf895757f42d67c697a4bdc4aaf49323b4
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_getBlockByNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_blockNumber[0m
-[32meth_chainId[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
 [32meth_call[0m
-  Contract call:       HydrogenCredit#getProducer
+  Contract call:       HydrogenCreditV2#getRemainingMonthlyCapacity
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getProducer
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_blockNumber[0m
-[32meth_getBlockByNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#registerProducer
-  Transaction:         0x43d41ffa05a807754bf645128178ca3d078c9e2ee79b2ecce54587b08dc08fa4
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            217417 of 30000000
-  Block #5:            0x44dbd6057cd13fb4e598920d7555b360b4924001415d189664b048d42953483c
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#issueCredits
-  Transaction:         0x41360d4ac7579770206614cbe7c164b27b38eaf9be1a6df14a61853f4a182cc4
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            222105 of 30000000
-  Block #6:            0xf7e0b80bdc9f8a3ac82c80b47e8d33818f5d7ecf7b1588439231d5073ed89415
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#issueCredits
-  Transaction:         0x68b94adfbb4f250231edab5eb508efe040cb9d086237338073c86097ba40f8a3
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            273393 of 30000000
-  Block #7:            0xea483cad487c8eb9eb3c6f5542ebbd29d0711eb7fc0724b5cdc11ed49f6ab755
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#issueCredits
-  Transaction:         0xd6230ea7a2852583ab603c8cda5136e541fe50dab71bd5fd21845dd140622477
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            222105 of 30000000
-  Block #8:            0xc7c9e9c53935a4064515616df317a93f70481ac74e62e2c656b832d63f75e8a3
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#approve
-  Transaction:         0x7b402180053c405f32e533a9d2117155ac80b347806ddb20a21dd65f6fc401d1
-  From:                0x70997970c51812dc3a010c7d01b50e0d17dc79c8
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            46430 of 30000000
-  Block #9:            0xd27d1055bbe75a4a08a53adef14b8698a14069e7e77aa8a317e52119839d069a
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCreditMarketplace#createListing
-  Transaction:         0xaca8d458c733b1afaab789eb44c238447a5057a3206431e053dfca865373af43
-  From:                0x70997970c51812dc3a010c7d01b50e0d17dc79c8
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-  Value:               0 ETH
-  Gas used:            272567 of 30000000
-  Block #10:           0xf2d754263b101f6ea1f20b1007dabf51add6006e83bfaf5960d2e2f5421e5890
 
-[32meth_getTransactionByHash[0m
 [32meth_blockNumber[0m
 [32meth_feeHistory[0m
 [32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#approve
-  Transaction:         0x07aa07f5dd2fa9ecbebe1e6e4302ef19dc0dd628fc030688849c4152da65f9c3
+  Contract call:       ProductionOracle#submitProductionData
+  Transaction:         0x3c2a7172c25002a32ce28b2fcb57569f86182abd19a75126a6605df83454c02f
+  From:                0x15d34aaf54267db7d7c367839aaf71a00a2c6a65
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0.1 ETH
+  Gas used:            286312 of 30000000
+  Block #13:           0xcd53c9d666841739aad2ac0986a8fe198b37a946c131aba4e41a6884623cb06e
+
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionReceipt[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[32meth_sendTransaction[0m
+  Contract call:       ProductionOracle#verifyProductionData
+  Transaction:         0xec97d899a838e9f9d55ec8b1b1594416e25b341765165e5ee82b66ea7daa5ba7
   From:                0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
   Value:               0 ETH
-  Gas used:            46430 of 30000000
-  Block #11:           0xfdef6e469a50394c8e8db91e0a219308d76478621a03b5b3ea22fe0cfa11132c
+  Gas used:            64825 of 30000000
+  Block #14:           0x6163528c6c4c8d2780e236fb0bd227e5de7f9d68755f2b0577e466c506060ad1
 
 [32meth_getTransactionByHash[0m
+[32meth_getTransactionReceipt[0m
+[32meth_blockNumber[0m
+[32meth_feeHistory[0m
+[31meth_sendTransaction[0m
+  Contract call:       HydrogenCreditV2#issueCreditsFromVerification
+  Transaction:         0x08b1fd19b7328d8edb7555e25bea180dad8c3767501e84da9d503478a7a1fa5f
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            39206 of 30000000
+  Block #15:           0xa8809af89938c021de131f218c486f9071232a8500de531b48e5e80d73f9e795
+
+  Error: reverted with reason string 'Production not verified'
+
+[32meth_call[0m
+  Contract call:       ProductionOracle#getActiveVerifiers
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       ProductionOracle#getPendingVerifications
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       ProductionOracle#getActiveVerifiers
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       ProductionOracle#getProducerSubmissions
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       ProductionOracle#getProducerSubmissions
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_call[0m
+  Contract call:       HydrogenCreditV2#getContractStats
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+
 [32meth_blockNumber[0m
 [32meth_feeHistory[0m
 [32meth_sendTransaction[0m
-  Contract call:       HydrogenCreditMarketplace#createListing
-  Transaction:         0xc8b4d6eb63c15b252bc2cd07cbaf66ed6a5dc3b63aec203f65a716859ef8f3e6
-  From:                0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc
+  Contract call:       HydrogenCreditV2#retireCredits
+  Transaction:         0x0c9ef8afaadcc835499696d503edb4ce356d771ce0cf970e9f20f09cf1247444
+  From:                0x90f79bf6eb2c4f870365e785982e1f101e93b906
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
   Value:               0 ETH
-  Gas used:            238379 of 30000000
-  Block #12:           0x8b89b7b5ca7b1917cf0b1c27ede083e36fd7d058f1ce87ac4618b96fe1dcff9e
+  Gas used:            87819 of 30000000
+  Block #16:           0xaeae208e442e15f80814ad744633f13dd63ba8559dc1b09abe0a0b0c384155e6
 
 [32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCredit#approve
-  Transaction:         0x11d7d8721aeb0cbcb1d131d54ad4c653838847c4b20cc6fbbf2573e3fcee23ee
-  From:                0x70997970c51812dc3a010c7d01b50e0d17dc79c8
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            46430 of 30000000
-  Block #13:           0x7efd4dfa7d9aeda51da9115a774bc141ddf06d7f487fe61ea5aae456ecc8c457
-
-[32meth_getTransactionByHash[0m
-[32meth_blockNumber[0m
-[32meth_feeHistory[0m
-[32meth_sendTransaction[0m
-  Contract call:       HydrogenCreditMarketplace#createListing
-  Transaction:         0x79e24a78298357598327a6fb14e8d730478a0d29eea50adda841a2dcc9aadcbc
-  From:                0x70997970c51812dc3a010c7d01b50e0d17dc79c8
+[32meth_getTransactionReceipt[0m
+[32meth_call[0m
+  Contract call:       HydrogenCreditV2#balanceOf
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-  Value:               0 ETH
-  Gas used:            221267 of 30000000
-  Block #14:           0x188563626032a18f61937d93638c100a3f963867bf793b1e47a9df97b287b761
-
-[32meth_getTransactionByHash[0m
-[32meth_call[0m
-  Contract call:       HydrogenCredit#totalSupply
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
 
 [32meth_call[0m
-  Contract call:       HydrogenCredit#totalRetiredCredits
+  Contract call:       HydrogenCreditV2#retiredCredits
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 
-[32meth_call[0m
-  Contract call:       HydrogenCredit#totalCreditBatches
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getRegisteredProducersCount
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_blockNumber[0m
-[32meth_getBlockByNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_getBalance (4)[0m
-[32meth_getBalance (5)[0m
-[32meth_getBalance (6)[0m
-[32meth_getBalance (7)[0m
-[32meth_getBalance (8)[0m
-[32meth_blockNumber[0m
-[32meth_blockNumber (2)[0m
-[32meth_blockNumber (3)[0m
-[32meth_blockNumber (4)[0m
-[32meth_blockNumber (5)[0m
-[32meth_blockNumber (6)[0m
-[32meth_blockNumber (7)[0m
-[32meth_blockNumber (8)[0m
-[32meth_getBalance[0m
-[32meth_blockNumber[0m
-[32meth_blockNumber (2)[0m
-[32meth_blockNumber (3)[0m
-[32meth_blockNumber (4)[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_chainId[0m
 [32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
+[32meth_accounts (2)[0m
+[32meth_accounts (3)[0m
+[32meth_accounts (4)[0m
+[32meth_accounts (5)[0m
+[32meth_accounts (6)[0m
 [32meth_call[0m
-  Contract call:       HydrogenCredit#name
+  WARNING: Calling an account which is not a contract
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
 
 [32meth_call[0m
-  Contract call:       HydrogenCredit#symbol
+  WARNING: Calling an account which is not a contract
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
 
 [32meth_call[0m
-  Contract call:       HydrogenCredit#totalSupply
+  WARNING: Calling an account which is not a contract
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
 
 [32meth_call[0m
-  Contract call:       HydrogenCredit#owner
+  WARNING: Calling an account which is not a contract
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
 
 [32meth_call[0m
-  Contract call:       HydrogenCredit#getContractStats
+  WARNING: Calling an account which is not a contract
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
 
 [32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
+  WARNING: Calling an account which is not a contract
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
 
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#platformFeePercent
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#totalListings
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#nextListingId
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getMarketplaceStats
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getListing
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_getBalance[0m
-[32meth_chainId[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_call[0m
-  Contract call:       HydrogenCredit#name
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#symbol
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#totalSupply
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#owner
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getContractStats
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#platformFeePercent
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#totalListings
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#nextListingId
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getMarketplaceStats
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getListing
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_chainId[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_accounts[0m
-[32mhardhat_metadata[0m
-[32mhardhat_metadata (2)[0m
-[32mhardhat_metadata (3)[0m
-[32mhardhat_metadata (4)[0m
-[32mhardhat_metadata (5)[0m
-[32mhardhat_metadata (6)[0m
-[32mhardhat_metadata (7)[0m
-[32mhardhat_metadata (8)[0m
-[32mhardhat_metadata (9)[0m
-[32mhardhat_metadata (10)[0m
-[32mhardhat_metadata (11)[0m
-[32mhardhat_metadata (12)[0m
-[32mhardhat_metadata (13)[0m
-[32mhardhat_metadata (14)[0m
-[32mhardhat_metadata (15)[0m
-[32mhardhat_metadata (16)[0m
-[32mhardhat_metadata (17)[0m
-[32mhardhat_metadata (18)[0m
-[32mhardhat_metadata (19)[0m
-[32mhardhat_metadata (20)[0m
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#balanceOf
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getProducer
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getProducer
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getProducerBatches
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getProducerBatches
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getCreditBatch
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getCreditBatch
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getCreditBatch
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCredit#getCreditBatch
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getSellerListings
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getSellerListings
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getListing
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getListing
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_call[0m
-  Contract call:       HydrogenCreditMarketplace#getListing
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
 [32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_getBalance (4)[0m
-[32meth_getBalance (5)[0m
-[32meth_blockNumber[0m
-[32meth_blockNumber (2)[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_blockNumber[0m
-[32meth_blockNumber (2)[0m
-[32meth_getBalance[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_getBalance (4)[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_getBalance (3)[0m
-[32meth_blockNumber[0m
-[32meth_getBalance[0m
-[32meth_getBalance (2)[0m
-[32meth_blockNumber[0m
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x322813fd9a801c5507c9de605d63cea4f2ce6c44
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+
+[32meth_call[0m
+  WARNING: Calling an account which is not a contract
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xa85233c63b9ee964add6f2cffe00fd84eb32338f
+

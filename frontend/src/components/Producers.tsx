@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useReadContract } from 'wagmi'
-import { readContract } from 'wagmi/actions'
-import { Address, formatEther, parseEther } from 'viem'
+import React, { useState, useEffect } from 'react';
+import { Address, formatEther } from 'viem';
 import {
     UserGroupIcon,
     MapPinIcon,
@@ -15,28 +13,29 @@ import {
     MagnifyingGlassIcon,
     FunnelIcon,
     XMarkIcon
-} from '@heroicons/react/24/outline'
-import { Card, SimpleCard } from './ui/Card'
-import { LoadingSpinner } from './ui/LoadingSpinner'
-import { getContractAddresses } from '../config/contracts'
-import { HYDROGEN_CREDIT_ABI } from '../config/contracts'
-import { useChainId } from 'wagmi'
+} from '@heroicons/react/24/outline';
+import { Card } from './ui/Card';
+import { LoadingSpinner } from './ui/LoadingSpinner';
 
 interface Producer {
-    plantId: string
-    location: string
-    renewableSource: string
-    capacity: bigint
-    totalProduced: bigint
-    registrationTime: bigint
-    isActive: boolean
-    kycVerified: boolean
-    monthlyLimit: bigint
-}
-
-interface ProducerWithAddress {
-    address: Address
-    producer: Producer
+    id: string;
+    user_id: string;
+    wallet_address: Address;
+    plant_id: string;
+    plant_name: string;
+    location: string;
+    country: string;
+    renewable_source: string;
+    capacity_kg_per_month: number;
+    certification_body: string;
+    certification_number: string;
+    registration_time: string;
+    is_active: boolean;
+    is_verified: boolean;
+    monthly_production_limit: string;
+    total_produced: string;
+    created_at: string;
+    updated_at: string;
 }
 
 const RENEWABLE_SOURCES = [
@@ -45,279 +44,98 @@ const RENEWABLE_SOURCES = [
     { value: 'Hydro', label: 'Hydroelectric', icon: BoltIcon, color: 'text-green-600', bgColor: 'bg-green-50' },
     { value: 'Geothermal', label: 'Geothermal', icon: BoltIcon, color: 'text-orange-600', bgColor: 'bg-orange-50' },
     { value: 'Biomass', label: 'Biomass', icon: BoltIcon, color: 'text-red-600', bgColor: 'bg-red-50' },
-]
+];
 
 const getSourceIcon = (source: string) => {
-    const sourceConfig = RENEWABLE_SOURCES.find(s => s.value === source)
+    const sourceConfig = RENEWABLE_SOURCES.find(s => s.value === source);
     if (sourceConfig) {
-        const IconComponent = sourceConfig.icon
-        return <IconComponent className={`h-5 w-5 ${sourceConfig.color}`} />
+        const IconComponent = sourceConfig.icon;
+        return <IconComponent className={`h-5 w-5 ${sourceConfig.color}`} />;
     }
-    return <BoltIcon className="h-5 w-5 text-gray-600" />
-}
+    return <BoltIcon className="h-5 w-5 text-gray-600" />;
+};
 
 const getSourceConfig = (source: string) => {
-    return RENEWABLE_SOURCES.find(s => s.value === source) || RENEWABLE_SOURCES[0]
-}
+    return RENEWABLE_SOURCES.find(s => s.value === source) || RENEWABLE_SOURCES[0];
+};
 
 export const Producers: React.FC = () => {
-    const chainId = useChainId()
-    const contractAddresses = getContractAddresses(chainId)
+    const [producers, setProducers] = useState<Producer[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterSource, setFilterSource] = useState<string>('all');
+    const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'inactive'>('all');
+    const [sortBy, setSortBy] = useState<'name' | 'location' | 'production' | 'date'>('name');
+    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+    const [selectedProducer, setSelectedProducer] = useState<Producer | null>(null);
 
-    // State
-    const [producers, setProducers] = useState<ProducerWithAddress[]>([])
-    const [loading, setLoading] = useState(true)
-    const [searchTerm, setSearchTerm] = useState('')
-    const [filterSource, setFilterSource] = useState<string>('all')
-    const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'inactive'>('all')
-    const [sortBy, setSortBy] = useState<'name' | 'location' | 'production' | 'date'>('name')
-    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-    const [selectedProducer, setSelectedProducer] = useState<ProducerWithAddress | null>(null)
-
-    // Contract reads
-    const { data: contractStats } = useReadContract({
-        address: contractAddresses.hydrogenCredit,
-        abi: HYDROGEN_CREDIT_ABI,
-        functionName: 'getContractStats',
-    }) as { data: [bigint, bigint, bigint, bigint] | undefined }
-
-    const { data: allProducers } = useReadContract({
-        address: contractAddresses.hydrogenCredit,
-        abi: HYDROGEN_CREDIT_ABI,
-        functionName: 'getAllProducers',
-    }) as { data: Address[] | undefined }
-
-    // Load producers
     useEffect(() => {
-        if (allProducers) {
-            loadProducers()
-        }
-    }, [allProducers])
-
-    // Filter and sort producers
-    useEffect(() => {
-        if (allProducers) {
-            loadProducers()
-        }
-    }, [searchTerm, filterSource, filterStatus, sortBy, sortOrder])
-
-    // Function to read producer data from contract
-    const readProducerData = async (producerAddress: Address): Promise<Producer | null> => {
-        try {
-            // For now, return sample data since we need to implement proper contract reading
-            // In a real implementation, this would read from the ProductionOracle contract
-            const sampleProducers: Producer[] = [
-                {
-                    plantId: "GH-PLANT-001",
-                    location: "Gujarat, India",
-                    renewableSource: "Solar",
-                    capacity: parseEther("1000"),
-                    isActive: true,
-                    kycVerified: true,
-                    registrationTime: BigInt(Math.floor(Date.now() / 1000) - 86400 * 30),
-                    totalProduced: parseEther("2500"),
-                    monthlyLimit: parseEther("500")
-                },
-                {
-                    plantId: "GH-PLANT-002", 
-                    location: "Rajasthan, India",
-                    renewableSource: "Wind",
-                    capacity: parseEther("800"),
-                    isActive: true,
-                    kycVerified: true,
-                    registrationTime: BigInt(Math.floor(Date.now() / 1000) - 86400 * 45),
-                    totalProduced: parseEther("1800"),
-                    monthlyLimit: parseEther("400")
-                },
-                {
-                    plantId: "GH-PLANT-003",
-                    location: "Tamil Nadu, India", 
-                    renewableSource: "Hydro",
-                    capacity: parseEther("600"),
-                    isActive: false,
-                    kycVerified: true,
-                    registrationTime: BigInt(Math.floor(Date.now() / 1000) - 86400 * 60),
-                    totalProduced: parseEther("1200"),
-                    monthlyLimit: parseEther("300")
-                },
-                {
-                    plantId: "GH-PLANT-004",
-                    location: "Karnataka, India",
-                    renewableSource: "Solar",
-                    capacity: parseEther("1200"),
-                    isActive: true,
-                    kycVerified: false,
-                    registrationTime: BigInt(Math.floor(Date.now() / 1000) - 86400 * 15),
-                    totalProduced: parseEther("800"),
-                    monthlyLimit: parseEther("600")
-                }
-            ]
-
-            // Return a producer based on the address (simple mapping for demo)
-            const index = parseInt(producerAddress.slice(-1), 16) % sampleProducers.length
-            return sampleProducers[index]
-        } catch (error) {
-            console.error('Error reading producer data:', error)
-            return null
-        }
-    }
+        loadProducers();
+    }, []);
 
     const loadProducers = async () => {
-        if (!allProducers) {
-            // If no producers from contract, use sample addresses for demo
-            const sampleAddresses: Address[] = [
-                '0x1234567890123456789012345678901234567890',
-                '0x2345678901234567890123456789012345678901', 
-                '0x3456789012345678901234567890123456789012',
-                '0x4567890123456789012345678901234567890123'
-            ]
-            
-            try {
-                setLoading(true)
-                const producersData: ProducerWithAddress[] = []
-
-                for (const producerAddress of sampleAddresses) {
-                    try {
-                        const producerData = await readProducerData(producerAddress)
-                        if (producerData) {
-                            producersData.push({
-                                address: producerAddress,
-                                producer: producerData
-                            })
-                        }
-                    } catch (error) {
-                        console.error(`Error loading producer ${producerAddress}:`, error)
-                    }
-                }
-
-                // Apply filters and sorting logic here...
-                let filtered = producersData
-
-                if (searchTerm) {
-                    filtered = filtered.filter(p =>
-                        p.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        p.producer.plantId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        p.producer.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                        p.producer.renewableSource.toLowerCase().includes(searchTerm.toLowerCase())
-                    )
-                }
-
-                if (filterSource !== 'all') {
-                    filtered = filtered.filter(p => p.producer.renewableSource === filterSource)
-                }
-
-                if (filterStatus !== 'all') {
-                    filtered = filtered.filter(p =>
-                        filterStatus === 'active' ? p.producer.isActive : !p.producer.isActive
-                    )
-                }
-
-                // Sort producers
-                filtered.sort((a, b) => {
-                    let comparison = 0
-                    switch (sortBy) {
-                        case 'name':
-                            comparison = a.producer.plantId.localeCompare(b.producer.plantId)
-                            break
-                        case 'location':
-                            comparison = a.producer.location.localeCompare(b.producer.location)
-                            break
-                        case 'production':
-                            comparison = Number(a.producer.totalProduced) - Number(b.producer.totalProduced)
-                            break
-                        case 'date':
-                            comparison = Number(a.producer.registrationTime) - Number(b.producer.registrationTime)
-                            break
-                    }
-                    return sortOrder === 'asc' ? comparison : -comparison
-                })
-
-                setProducers(filtered)
-            } catch (error) {
-                console.error('Error loading producers:', error)
-            } finally {
-                setLoading(false)
-            }
-            return
-        }
-
         try {
-            setLoading(true)
-            const producersData: ProducerWithAddress[] = []
-
-            for (const producerAddress of allProducers) {
-                try {
-                    const producerData = await readProducerData(producerAddress)
-                    if (producerData) {
-                        producersData.push({
-                            address: producerAddress,
-                            producer: producerData
-                        })
-                    }
-                } catch (error) {
-                    console.error(`Error loading producer ${producerAddress}:`, error)
-                }
+            setLoading(true);
+            const response = await fetch('http://localhost:3001/api/producers');
+            const result = await response.json();
+            if (result.success) {
+                setProducers(result.data);
             }
-
-            // Apply filters
-            let filtered = producersData
-
-            if (searchTerm) {
-                filtered = filtered.filter(p =>
-                    p.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    p.producer.plantId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    p.producer.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    p.producer.renewableSource.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-            }
-
-            if (filterSource !== 'all') {
-                filtered = filtered.filter(p => p.producer.renewableSource === filterSource)
-            }
-
-            if (filterStatus !== 'all') {
-                filtered = filtered.filter(p =>
-                    filterStatus === 'active' ? p.producer.isActive : !p.producer.isActive
-                )
-            }
-
-            // Sort producers
-            filtered.sort((a, b) => {
-                let comparison = 0
-                switch (sortBy) {
-                    case 'name':
-                        comparison = a.producer.plantId.localeCompare(b.producer.plantId)
-                        break
-                    case 'location':
-                        comparison = a.producer.location.localeCompare(b.producer.location)
-                        break
-                    case 'production':
-                        comparison = Number(a.producer.totalProduced - b.producer.totalProduced)
-                        break
-                    case 'date':
-                        comparison = Number(a.producer.registrationTime - b.producer.registrationTime)
-                        break
-                }
-                return sortOrder === 'asc' ? comparison : -comparison
-            })
-
-            setProducers(filtered)
         } catch (error) {
-            console.error('Error loading producers:', error)
+            console.error('Error loading producers:', error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
-
-
+    const filteredProducers = producers
+        .filter(p => {
+            if (searchTerm) {
+                return (
+                    p.plant_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    p.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    p.renewable_source.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            return true;
+        })
+        .filter(p => {
+            if (filterSource !== 'all') {
+                return p.renewable_source === filterSource;
+            }
+            return true;
+        })
+        .filter(p => {
+            if (filterStatus !== 'all') {
+                return filterStatus === 'active' ? p.is_active : !p.is_active;
+            }
+            return true;
+        })
+        .sort((a, b) => {
+            let comparison = 0;
+            switch (sortBy) {
+                case 'name':
+                    comparison = a.plant_name.localeCompare(b.plant_name);
+                    break;
+                case 'location':
+                    comparison = a.location.localeCompare(b.location);
+                    break;
+                case 'production':
+                    comparison = Number(a.total_produced) - Number(b.total_produced);
+                    break;
+                case 'date':
+                    comparison = new Date(a.registration_time).getTime() - new Date(b.registration_time).getTime();
+                    break;
+            }
+            return sortOrder === 'asc' ? comparison : -comparison;
+        });
 
     if (loading) {
         return (
             <div className="flex justify-center py-12">
                 <LoadingSpinner size="lg" />
             </div>
-        )
+        );
     }
 
     return (
@@ -330,7 +148,7 @@ export const Producers: React.FC = () => {
                         <div className="ml-4">
                             <p className="text-sm font-medium text-gray-600">Total Producers</p>
                             <p className="text-2xl font-bold text-gray-900">
-                                {contractStats?.[3]?.toString() || '0'}
+                                {producers.length}
                             </p>
                         </div>
                     </div>
@@ -342,7 +160,7 @@ export const Producers: React.FC = () => {
                         <div className="ml-4">
                             <p className="text-sm font-medium text-gray-600">Total Production</p>
                             <p className="text-2xl font-bold text-gray-900">
-                                {contractStats?.[0] ? `${Number(formatEther(contractStats[0])).toFixed(0)} GHC` : '0 GHC'}
+                                {producers.reduce((acc, p) => acc + Number(p.total_produced), 0).toFixed(0)} GHC
                             </p>
                         </div>
                     </div>
@@ -354,7 +172,7 @@ export const Producers: React.FC = () => {
                         <div className="ml-4">
                             <p className="text-sm font-medium text-gray-600">Active Producers</p>
                             <p className="text-2xl font-bold text-gray-900">
-                                {producers.filter(p => p.producer.isActive).length}
+                                {producers.filter(p => p.is_active).length}
                             </p>
                         </div>
                     </div>
@@ -425,18 +243,18 @@ export const Producers: React.FC = () => {
 
             {/* Producers Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {producers.map((producerData) => (
+                {filteredProducers.map((producer) => (
                     <ProducerCard
-                        key={producerData.address}
-                        producerData={producerData}
-                        onSelect={() => setSelectedProducer(producerData)}
-                        isSelected={selectedProducer?.address === producerData.address}
+                        key={producer.id}
+                        producer={producer}
+                        onSelect={() => setSelectedProducer(producer)}
+                        isSelected={selectedProducer?.id === producer.id}
                     />
                 ))}
             </div>
 
             {/* Empty State */}
-            {producers.length === 0 && (
+            {filteredProducers.length === 0 && (
                 <div className="text-center py-12">
                     <UserGroupIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                     <h3 className="text-lg font-medium text-gray-900 mb-2">No producers found</h3>
@@ -455,7 +273,7 @@ export const Producers: React.FC = () => {
                         <div className="mt-3">
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-lg font-medium text-gray-900">
-                                    {selectedProducer.producer.plantId}
+                                    {selectedProducer.plant_name}
                                 </h3>
                                 <button
                                     onClick={() => setSelectedProducer(null)}
@@ -469,38 +287,38 @@ export const Producers: React.FC = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <p className="text-sm text-gray-600">Plant ID</p>
-                                        <p className="font-medium text-gray-900">{selectedProducer.producer.plantId}</p>
+                                        <p className="font-medium text-gray-900">{selectedProducer.plant_id}</p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-600">Status</p>
-                                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${selectedProducer.producer.isActive
+                                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${selectedProducer.is_active
                                             ? 'bg-green-100 text-green-800'
                                             : 'bg-red-100 text-red-800'
                                             }`}>
-                                            {selectedProducer.producer.isActive ? 'Active' : 'Inactive'}
+                                            {selectedProducer.is_active ? 'Active' : 'Inactive'}
                                         </span>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-600">Location</p>
-                                        <p className="font-medium text-gray-900">{selectedProducer.producer.location}</p>
+                                        <p className="font-medium text-gray-900">{selectedProducer.location}</p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-600">Renewable Source</p>
                                         <div className="flex items-center gap-2">
-                                            {getSourceIcon(selectedProducer.producer.renewableSource)}
-                                            <span className="font-medium text-gray-900">{selectedProducer.producer.renewableSource}</span>
+                                            {getSourceIcon(selectedProducer.renewable_source)}
+                                            <span className="font-medium text-gray-900">{selectedProducer.renewable_source}</span>
                                         </div>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-600">Total Produced</p>
                                         <p className="font-medium text-gray-900">
-                                            {Number(formatEther(selectedProducer.producer.totalProduced)).toFixed(2)} GHC
+                                            {Number(selectedProducer.total_produced).toFixed(2)} GHC
                                         </p>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-600">Registration Date</p>
                                         <p className="font-medium text-gray-900">
-                                            {new Date(Number(selectedProducer.producer.registrationTime) * 1000).toLocaleDateString()}
+                                            {new Date(selectedProducer.registration_time).toLocaleDateString()}
                                         </p>
                                     </div>
                                 </div>
@@ -508,7 +326,7 @@ export const Producers: React.FC = () => {
                                 <div>
                                     <p className="text-sm text-gray-600">Address</p>
                                     <p className="font-mono text-sm text-gray-900 break-all">
-                                        {selectedProducer.address}
+                                        {selectedProducer.wallet_address}
                                     </p>
                                 </div>
                             </div>
@@ -517,47 +335,44 @@ export const Producers: React.FC = () => {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
 // Producer Card Component
 interface ProducerCardProps {
-    producerData: ProducerWithAddress
-    onSelect: () => void
-    isSelected: boolean
+    producer: Producer;
+    onSelect: () => void;
+    isSelected: boolean;
 }
 
 const ProducerCard: React.FC<ProducerCardProps> = ({
-    producerData,
+    producer,
     onSelect,
     isSelected
 }) => {
-    const { address, producer } = producerData
-
-    const formattedTotalProduced = Number(formatEther(producer.totalProduced))
-    const registrationDate = new Date(Number(producer.registrationTime) * 1000)
-    const sourceConfig = getSourceConfig(producer.renewableSource)
+    const registrationDate = new Date(producer.registration_time);
+    const sourceConfig = getSourceConfig(producer.renewable_source);
 
     return (
-        <Card title={producer.plantId}>
+        <Card title={producer.plant_name}>
             <div className="space-y-4">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className={`p-2 rounded-lg ${sourceConfig.bgColor}`}>
-                            {getSourceIcon(producer.renewableSource)}
+                            {getSourceIcon(producer.renewable_source)}
                         </div>
                         <div>
-                            <h3 className="font-semibold text-gray-900">{producer.plantId}</h3>
+                            <h3 className="font-semibold text-gray-900">{producer.plant_name}</h3>
                             <p className="text-sm text-gray-600">{producer.location}</p>
                         </div>
                     </div>
 
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${producer.isActive
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${producer.is_active
                         ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
                         }`}>
-                        {producer.isActive ? 'Active' : 'Inactive'}
+                        {producer.is_active ? 'Active' : 'Inactive'}
                     </span>
                 </div>
 
@@ -566,13 +381,13 @@ const ProducerCard: React.FC<ProducerCardProps> = ({
                     <div>
                         <p className="text-sm text-gray-600">Total Produced</p>
                         <p className="text-lg font-semibold text-gray-900">
-                            {formattedTotalProduced.toFixed(2)} GHC
+                            {Number(producer.total_produced).toFixed(2)} GHC
                         </p>
                     </div>
 
                     <div>
                         <p className="text-sm text-gray-600">Source</p>
-                        <p className="text-sm font-medium text-gray-900">{producer.renewableSource}</p>
+                        <p className="text-sm font-medium text-gray-900">{producer.renewable_source}</p>
                     </div>
 
                     <div>
@@ -585,7 +400,7 @@ const ProducerCard: React.FC<ProducerCardProps> = ({
                     <div>
                         <p className="text-sm text-gray-600">Address</p>
                         <p className="text-sm font-medium text-gray-900 font-mono">
-                            {address.slice(0, 6)}...{address.slice(-4)}
+                            {producer.wallet_address.slice(0, 6)}...{producer.wallet_address.slice(-4)}
                         </p>
                     </div>
                 </div>
@@ -601,5 +416,5 @@ const ProducerCard: React.FC<ProducerCardProps> = ({
                 </div>
             </div>
         </Card>
-    )
-}
+    );
+};

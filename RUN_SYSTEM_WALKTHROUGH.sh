@@ -44,7 +44,7 @@ npm install
 print_success "Root dependencies installed"
 
 echo "Installing frontend dependencies..."
-cd frontend && npm install && cd ..
+cd frontend && npm install --legacy-peer-deps && cd ..
 print_success "Frontend dependencies installed"
 
 echo "Installing backend dependencies..."
@@ -96,6 +96,8 @@ if ! command -v docker-compose &> /dev/null; then
         exit 1
     fi
 else
+    echo "Cleaning up previous database instance (if any)..."
+    docker-compose down -v
     echo "Starting PostgreSQL container..."
     docker-compose up -d postgres
     
